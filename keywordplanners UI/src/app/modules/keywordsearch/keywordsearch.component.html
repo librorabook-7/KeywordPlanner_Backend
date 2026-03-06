@@ -1,0 +1,744 @@
+<div class="bg-2-sub-s">
+    <!-- <div class="bg-2-sub-s-head-f">
+        <h4 class="bg-2-sub-s-head">GOOGLE</h4>
+        <h4 class="bg-2-sub-s-head-2">YOUTUBE</h4>
+    </div> -->
+    <div class="bg-2-sub-s-2">
+        <div class="bg-2-sub-s-2-para">
+            <div class="col-md-auto col-sm-auto col-pad21b col-3 mycol">
+            <select name="" #selLocationsGoogle id="selLocations" (change)="getStates($event.target.value)" style="padding-top: 10px;" placeholder="Languages" class="lan-rs-dp lang-dp">
+                <option *ngFor="let location of locationList" value="{{ location.CCLC }}" [selected]="location.Name == 'United States'"> {{ location.CountryLanguage }} </option>
+            </select>
+            </div>
+        </div>
+        <div class="bg-2-sub-s-2-para">
+            <div class="col-md-auto col-sm-auto col-pad21b col-3 mycol">
+                <select id="ddlGoogleLocation" #selSeachCityRefSearch style="padding-top: 10px;" placeholder="Languages" class="lan-rs-dp lang-dp">
+                    <option value="0">City</option>
+                    <option *ngFor="let searchCity of cityList" [value]="searchCity.m_Item2">{{searchCity.m_Item1}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="bg-2-sub-s-2-para">
+            <div class="col-md-auto col-sm-auto col-pad21b col-3 mycol">
+                <select name="" #selStateGoogle id="selStateGoogle" (change)="getStates($event.target.value,true)" style="padding-top: 10px;" placeholder="Languages" class="lan-rs-dp lang-dp">
+                    <option value="0">State/Town</option>
+                    <option *ngFor="let state of stateList" value="{{ state.m_Item2 }}" > {{ state.m_Item1 }} </option>
+                </select>
+            </div>
+        </div>
+        <div class="bg-2-sub-s-2-para">
+            <div class="col-md-auto col-sm-auto col-pad21b col-3 mycol">
+                <div style="display: flex;flex-direction: row;">
+                    <input type="checkbox" id="ddlIncludeChartData"/>
+                    <i class="chartIcon"></i>
+                    <label id="" style="padding-top: 10px;">Charts</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row no-side-spacing search-bar mt-4" style="background-color: white; background-image: none; border: 1px solid black;">
+        <div class="col col-pad21 col-10 mycol" style="border-right: none;">
+            <input class="header-search" type="search" (keydown)="onEnter($event)"  #searchFieldGoogle class="header-search" placeholder="Search Keyword...">
+        </div>
+        <div class="col-2 search-btn-container">
+            <button class="search-btn">
+                <i class="searchIcon" (click)="onClickMe(searchFieldGoogle.value, '0', selLocationsGoogle.value,selStateGoogle.value, txtNegativeKeywords.value, false,'')"></i>
+            </button>
+        </div>
+
+    </div>
+
+</div>
+<div class="bg-2-sub-s-2-head">
+    <div style="padding: 24px" class="flex col gap-8">
+        <div class="container flex col">
+            <div class="flex gap-32">
+                <div class="flex-1">
+                    <h2 style="text-align: center;">Search Volume Setting</h2>
+                    <div class="flex col gap-8 pad-16">
+                        <div class="flex center gap-32">
+                            <label for="Language" class="label text-left">Language</label>
+                            <!-- <select id="ddlGoogleLanguage" #selSeachLanguageRefSearch class="select">
+                                <option *ngFor="let searchLang of uniqueLanguageList" [selected]="searchLang.Language == 'English'" [value]="searchLang.LanguageID" >{{searchLang.Language}}</option>
+                            </select> -->
+                            <select class="select" #selSeachLanguageRefSearch id="ddlGoogleLanguage">
+                                <option *ngFor="let searchLang of uniqueLanguageList" [selected]="searchLang.Language == 'English'" [value]="searchLang.LanguageID" >{{searchLang.Language}}</option>
+                            </select>
+                        </div>
+                        <div class="flex center gap-32">
+                            <label for="Network" class="label text-left">Network</label>
+                            <!-- <select id="ddlGoogleSearchNetwork" #selGoolgeSearchNetwork placeholder="Languages" class="form-control">
+                                <option value="0">Google</option>
+                                <option value="1">Google Search Partners</option>
+                            </select> -->
+                            <select class="select" id="ddlGoogleSearchNetwork" #selGoolgeSearchNetwork placeholder="Languages">
+                                <option value="0">Google</option>
+                                <option value="1">Google Search Partners</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h2 style="text-align: center;">Search Volume Setting</h2>
+                    <div class="flex col gap-8">
+                        <div class="flex gap-32 center">
+                            <label class="label text-left" for="Volume">Volume</label>
+                            <input id="txtGoogleSaerchVolumeMin" class="input-number" #searchVolumeMin type="number" placeholder="Min" min="0">
+                            <input id="txtGoogleSaerchVolumeMax" class="input-number" #searchVolumeMax type="number" placeholder="Max">
+<!-- 
+                            <input class="input-number" type="number" placeholder="Min" min="0">
+                            <input class="input-number" type="number" placeholder="Max"> -->
+                        </div>
+                        <div class="flex gap-32 center">
+                            <label class="label text-left" for="Competition">Competition</label>
+                            <input id="txtGoogleCompetitionMin" class="input-number" #competitionMin type="number" placeholder="Min" min="0">
+                            <input id="txtGoogleCompetitionMax" class="input-number" #competitionMax type="number" placeholder="Max">
+<!-- 
+                            <input class="input-number" type="number" placeholder="Min" min="0">
+                            <input class="input-number" type="number" placeholder="Max"> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h2 style="text-align: center">Negative Keyword</h2>
+                    <textarea class="text-area" id="txtNegativeKeywords" rows="4" #txtNegativeKeywords placeholder="Enter comma seperated negative keywords"  style="resize: none;height:100px;"></textarea>
+                </div>
+            </div>
+            <div>
+                <button class="go-btn" type="submit" (click)="onClickMe(searchFieldGoogle.value, '0', selLocationsGoogle.value + '/' + selSeachLanguageRefSearch.value,selStateGoogle.value, txtNegativeKeywords.value, true,selSeachCityRefSearch.value,'')">Go</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bg-2-sub-s">
+    <h5 class="head-1-search">Search <span style="color: #DB4628;"> Result</span></h5>
+    <div class="row py-2">
+        <div class="col hide5">
+        </div>
+        <div class="col-md-auto col-sm-auto col-auto pad-right-9">
+            <button class="keyword-use-btn" (click)="onCopyClipBoard()">Copy to Clipboard</button>
+        </div>
+        <div class="col-md-auto col-sm-auto col-auto pad-right-9">
+            <button class="keyword-use-btn" (click)="onExportToExcel()">Export</button>
+        </div>
+        <div class="col-md-auto col-sm-auto col-auto pad-right-9">                               
+        </div>
+    </div>
+    <p class="sub-head-1-search">
+        <app-summary-info [GridBarModelInput]="GridBarModel" [SearchTerm]="searchParam" [KeyWordDataLength]="keywordData.length" [HideSummaryInfo]="false" CanSummaryId="KeywordFinderChart">
+        </app-summary-info>
+    </p>
+    <div class="margin-search">
+        <table class="styled-table-2-search">
+            <thead>
+                <tr class="stroke-search">
+                    <th class="hover-1-search" [ngStyle]="{ color: isSet(1) ? '#DB4628' : 'black' }" (click)="setTab(1)">Keywords ({{ config.totalItems }})</th>
+                    <th class="hover-2-search" [ngStyle]="{ color: isSet(2) ? '#DB4628' : 'black' }" (click)="setTab(2)">Related Keywords ({{ relatedKeywordConfig.totalItems }})</th>
+                    <th class="hover-3-search" [ngStyle]="{ color: isSet(3) ? '#DB4628' : 'black' }" (click)="setTab(3)">Questions ({{ questionConfig.totalItems }})</th>
+                    <th class="hover-4-search" [ngStyle]="{ color: isSet(4) ? '#DB4628' : 'black' }" (click)="setTab(4)">Prepositions ({{ prepConfig.totalItems }})</th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+    <div class="margin-search" [hidden]="!isSet(1)">
+        <table class="styled-table-search" mdbTable>
+            <thead>
+                <tr>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="KeywordText">
+                        Keywords <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Keywords are pulled from the Google autocomplete. Keywords are generated by placing different search
+                terms into the search box of Google."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="SearchVolume">
+                        Search Volume <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Search Volume is the average number of times people search for this exact keyword per month. It
+                helps you understand how popular the keyword is."></i>
+                    </th>
+                    <!-- for responsiveness -->
+                    <th class="tableGreen-border " [mdbTableSort]="keywordData" sortBy="Ternd">
+                        Trend <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Trend shows how the monthly search volume for a keyword has changed over the last 12 months."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="HighestBid">
+                        High Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Highest Bid is highest bid which paid."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="LowestBid">
+                        Low Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Lowest Bid is lowest bid which paid.."></i>
+                    </th>
+                    <!-- <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="AverageCPC">
+                        CPC <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Cost-Per-Click (CPC) is estimated sum of money that advertisers are paying to bid on this keyword on Google
+                Ads. It helps to identify how lucrative the keyword is."></i>
+                    </th> -->
+                    <!-- for responsiveness -->
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="Competition">
+                        Competition <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Competition is the number of advertisers bidding on each keyword, relative to all keywords across
+                Google. It helps you understand how competitive the keyword is."></i>
+                    </th>
+                    <!-- <th>
+                        <i class="fa fa-question-circle" style="padding-left: 3px;" title="Select keyword to create Google Ads."></i>
+                    </th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <ng-template ngFor let-keyword [ngForOf]="keywordData | paginate: config" let-i="index">
+                    <tr class="result-row" (click)="showHideGraph(keyword.ID)">
+                        <td [innerHTML]="formatKeywordText(keyword.KeywordText, searchFieldGoogle.value) | safeHtml">
+                        </td>
+                        <td [className]="((!blnIsUserLogged && (i > wordCount || config.currentPage > 1))) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.SearchVolume | number:'.' }}</td>
+                        <td [className]="((!blnIsUserLogged && (i > wordCount || config.currentPage > 1))) ? 'text-blur' : ''" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''"></td>
+                        <td [className]="((!blnIsUserLogged && (i > wordCount || config.currentPage > 1))) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                        <td [className]="((!blnIsUserLogged && (i > wordCount || config.currentPage > 1))) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                        <td [className]="((!blnIsUserLogged && (i > wordCount || config.currentPage > 1))) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.Competition  }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                    </tr>
+                    <tr [attr.id]=" 'trGraph' + keyword.ID" [style.display]=" 'none'">
+                        <td colspan="7">
+                            <div class="div-chart-info" [attr.id]=" 'divInfo' + keyword.ID"></div>
+                            <canvas [attr.id]=" 'canvas' + keyword.ID"></canvas>
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+        <pagination-controls id="keywordPaginationControl" (pageChange)="pageChanged($event)"></pagination-controls>
+        <div class="">
+            <p class="p-1-search">🚀 Keyword Planner <span style="color: #DB4628;">Pro</span></p>
+            <p class="p-2-search">Need more information?</p>
+            <p class="p-3-search">Get all potential keywords with keyword planners pro</p>
+            <div class="btn-align-search">
+                <button class="btn-1-search">Try it now!</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="margin-search" [hidden]="!isSet(2)">
+        <table class="styled-table-search" mdbTable>
+            <thead>
+                <tr>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="KeywordText">
+                        Keywords <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Keywords are pulled from the Google autocomplete. Keywords are generated by placing different search
+                terms into the search box of Google."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="SearchVolume">
+                        Search Volume <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Search Volume is the average number of times people search for this exact keyword per month. It
+                helps you understand how popular the keyword is."></i>
+                    </th>
+                    <th class="tableGreen-border " [mdbTableSort]="keywordData" sortBy="Ternd">
+                        Trend <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Trend shows how the monthly search volume for a keyword has changed over the last 12 months."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="HighestBid">
+                        High Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Highest Bid is highest bid which paid."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="LowestBid">
+                        Low Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Lowest Bid is lowest bid which paid.."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="Competition">
+                        Competition <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Competition is the number of advertisers bidding on each keyword, relative to all keywords across
+                Google. It helps you understand how competitive the keyword is."></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-template ngFor let-keyword [ngForOf]="relatedKeywordDate | paginate: relatedKeywordConfig" let-i="index">
+                    <tr class="result-row" (click)="showHideRelatedKeywordGraph(keyword.ID)">
+                        <td >
+                            {{ keyword.KeywordText }}
+                        </td>
+                        <td [className]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.SearchVolume | number:'.' }}</td>
+                        <td [className]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                        <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                        <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                        <td [className]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                    </tr>
+                    <tr [attr.id]=" 'trRelatedKeywordGraph' + keyword.ID" [style.display]=" 'none'">
+                        <td colspan="7">
+                            <div class="div-chart-info" [attr.id]=" 'divInfoRelatedKeyword' + keyword.ID"></div>
+                            <canvas [attr.id]=" 'canvasRelatedKeyword' + keyword.ID"></canvas>
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+        <pagination-controls id="relatedKeywordPaginationControl" (pageChange)="pageChangedRelatedKeyword($event)"></pagination-controls>
+        <div class="">
+            <p class="p-1-search">🚀 Keyword Planner <span style="color: #DB4628;">Pro</span></p>
+            <p class="p-2-search">Need more information?</p>
+            <p class="p-3-search">Get all potential keywords with keyword planners pro</p>
+            <div class="btn-align-search">
+                <button class="btn-1-search">Try it now!</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="margin-search" [hidden]="!isSet(3)">
+        <table class="styled-table-search" mdbTable>
+            <thead>
+                <tr>
+                    <th class="tableGreen-border" [mdbTableSort]="questionsData" sortBy="KeywordText">
+                        Keywords <i class='fa fa-sort'></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="questionsData" sortBy="SearchVolume">
+                        Search Volume <i class='fa fa-sort'></i>
+                    </th>
+                    <th class="tableGreen-border " [mdbTableSort]="questionsData" sortBy="Ternd">
+                        Trend <i class='fa fa-sort'></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="HighestBid">
+                        High Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Highest Bid is highest bid which paid."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="LowestBid">
+                        Low Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Lowest Bid is lowest bid which paid.."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="questionsData" sortBy="Competition">
+                        Competition <i class='fa fa-sort'></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="result-row" *ngFor="let keyword of questionsData | paginate: questionConfig;let i = index;" >
+                    <td >
+                        {{ keyword.KeywordText }}
+                    </td>
+                    <td [className]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.SearchVolume | number:'.' }}</td>
+                    <td [className]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''"  [attr.title]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                    <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                        <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                    <td [className]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls id="questionsPaginationControl" (pageChange)="pageQuestionsChanged($event)"></pagination-controls>
+        <div class="">
+            <p class="p-1-search">🚀 Keyword Planner <span style="color: #DB4628;">Pro</span></p>
+            <p class="p-2-search">Need more information?</p>
+            <p class="p-3-search">Get all potential keywords with keyword planners pro</p>
+            <div class="btn-align-search">
+                <button class="btn-1-search">Try it now!</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="margin-search" [hidden]="!isSet(4)">
+        <table class="styled-table-search" mdbTable>
+            <thead>
+                <tr>
+                    <th class="tableGreen-border" [mdbTableSort]="prepData" sortBy="KeywordText">
+                        Keywords <i class='fa fa-sort'></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="prepData" sortBy="SearchVolume">
+                        Search Volume <i class='fa fa-sort'></i>
+                    </th>
+                    <th class="tableGreen-border " [mdbTableSort]="prepData" sortBy="Ternd">
+                        Trend <i class='fa fa-sort'></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="HighestBid">
+                        High Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Highest Bid is highest bid which paid."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="LowestBid">
+                        Low Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Lowest Bid is lowest bid which paid.."></i>
+                    </th>
+                    <th class="tableGreen-border" [mdbTableSort]="prepData" sortBy="Competition">
+                        Competition <i class='fa fa-sort'></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="result-row" *ngFor="let keyword of prepData | paginate: prepConfig;let i = index;">
+                    <td>
+                        {{ keyword.KeywordText }}
+                    </td>
+                    <td [className]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.SearchVolume | number:'.' }}</td>
+                    <td [className]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                    <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                    <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                    <td [className]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls id="prepPaginationControl" (pageChange)="pagePrepChanged($event)"></pagination-controls>
+        <div class="">
+            <p class="p-1-search">🚀 Keyword Planner <span style="color: #DB4628;">Pro</span></p>
+            <p class="p-2-search">Need more information?</p>
+            <p class="p-3-search">Get all potential keywords with keyword planners pro</p>
+            <div class="btn-align-search">
+                <button class="btn-1-search">Try it now!</button>
+            </div>
+
+        </div>
+    </div> 
+</div>
+
+<!-- ---------------------------------------
+<div class="tab-pane fade show active" id="google-tb" role="tabpanel" aria-labelledby="google-tb-tab">
+    <div class="row no-side-spacing search-bar">
+        <div class="col col-pad21 col-10 mycol" style="border-right: none;">
+            <input  type="search" style="padding-top: 10px;" (keydown)="onEnter($event)"  #searchFieldGoogle class="header-search" placeholder="Search Keyword...">
+        </div>
+        <div class="col-2 search-btn-container">
+            <button class="search-btn">
+                <i class="searchIcon" (click)="onClickMe(searchFieldGoogle.value, '0', selLocationsGoogle.value,selStateGoogle.value, txtNegativeKeywords.value, false,'')"></i>
+            </button>
+        </div>
+
+    </div>
+    <div class="row no-side-spacing py-10">
+        <div class="col-md-auto col-sm-auto col-pad21b col-3 mycol search-bar-filter">
+            <select name="" #selLocationsGoogle id="selLocations" (change)="getStates($event.target.value)" style="padding-top: 10px;" placeholder="Languages" class="lan-rs-dp lang-dp">
+                <option *ngFor="let location of locationList" value="{{ location.CCLC }}" [selected]="location.Name == 'United States'"> {{ location.CountryLanguage }} </option>
+            </select>
+        </div>
+        <div class="col-md-auto col-sm-auto col-pad21b col-3 mycol search-bar-filter">
+            <select name="" #selStateGoogle id="selStateGoogle" (change)="getStates($event.target.value,true)" style="padding-top: 10px;" placeholder="Languages" class="lan-rs-dp lang-dp">
+                <option value="0">State/Town</option>
+                <option *ngFor="let state of stateList" value="{{ state.m_Item2 }}" > {{ state.m_Item1 }} </option>
+            </select>
+        </div>
+        <div class="col-md-auto col-sm-auto col-pad21b col-3 mycol search-bar-filter">
+            <select id="ddlGoogleLocation" #selSeachCityRefSearch style="padding-top: 10px;" placeholder="Languages" class="lan-rs-dp lang-dp">
+                <option value="0">City</option>
+                <option *ngFor="let searchCity of cityList" [value]="searchCity.m_Item2">{{searchCity.m_Item1}}</option>
+            </select>
+        </div>
+        
+        
+        <div class="col-md-auto col-sm-auto col-pad21b col-3 mycol search-bar-filter">
+            <div style="display: flex;flex-direction: row;">
+                <input type="checkbox" id="ddlIncludeChartData"/>
+                <i class="chartIcon"></i>
+                <label id="" style="padding-top: 10px;">Charts</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row no-side-margin">
+
+
+    <div class="col">
+
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col refineSearch-container">
+                        Refine Search
+                        <i class="{{ refineSearchPath }}" style="padding-left: 3px;" (click)="onShowHideSearchPanel($event)"></i>
+                        <i class="fa fa-question-circle" style="padding-left: 3px;" title="Filter your grid data."></i>
+                    </div>
+                </div>
+
+                <div class="row keywordBg" [hidden]="!showSearchSection">
+                    <div class="col result-hd-contain3 ">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <div class="row">
+                                    <div class="col border-bottom rs-con-hd">Search Volume Settings</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col md-a10">                                 
+
+                                        <div class="row justify-content-between">
+                                            <div class="col-4">Language</div>
+                                            <div class="col rs-select-con">
+                                                <select id="ddlGoogleLanguage" #selSeachLanguageRefSearch class="form-control">
+                                                    <option *ngFor="let searchLang of uniqueLanguageList" [selected]="searchLang.Language == 'English'" [value]="searchLang.LanguageID" >{{searchLang.Language}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-between">
+                                            <div class="col-4">Network</div>
+                                            <div class="col rs-select-con">
+                                                <select id="ddlGoogleSearchNetwork" #selGoolgeSearchNetwork placeholder="Languages" class="form-control">
+                                                    <option value="0">Google</option>
+                                                    <option value="1">Google Search Partners</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <div class="row">
+                                    <div class="col border-bottom rs-con-hd">Search Volume Settings</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col md-a10">
+                                        <div class="row justify-content-between">
+                                            <div class="col-4">Volume</div>
+                                            <div class="col rs-input-con ">
+                                                <input id="txtGoogleSaerchVolumeMin" class="form-control" #searchVolumeMin type="text" placeholder="Min">
+                                            </div>
+                                            <div class="col rs-input-con ">
+                                                <input id="txtGoogleSaerchVolumeMax" class="form-control" #searchVolumeMax type="text" placeholder="Max">
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-between">
+                                            <div class="col-4">Competition</div>
+                                            <div class="col rs-input-con ">
+                                                <input id="txtGoogleCompetitionMin" class="form-control" #competitionMin type="text" placeholder="Min">
+                                            </div>
+                                            <div class="col rs-input-con ">
+                                                <input id="txtGoogleCompetitionMax" class="form-control" #competitionMax type="text" placeholder="Max">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-12">
+                                <div class="row">
+                                    <div class="col border-bottom rs-con-hd">Negative Keywords</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col md-a10">
+                                        <textarea id="txtNegativeKeywords" #txtNegativeKeywords class="form-control" placeholder="Enter comma separated negative keywords"  style="resize: none;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col right">
+                                <button class="rs-go-btn" type="submit" (click)="onClickMe(searchFieldGoogle.value, '0', selLocationsGoogle.value + '/' + selSeachLanguageRefSearch.value,selStateGoogle.value, txtNegativeKeywords.value, true,selSeachCityRefSearch.value,'')">Go</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        <div class="row keywordBg">
+            <div class="col">
+
+                <div class="row padT10">
+                    <div class="col hide5">
+                    </div>
+                    <div class="col-md-auto col-sm-auto col-auto pad-right-9">
+                        <button class="keyword-use-btn" (click)="onCopyClipBoard()">Copy to Clipboard</button>
+                    </div>
+                    <div class="col-md-auto col-sm-auto col-auto pad-right-9">
+                        <button class="keyword-use-btn" (click)="onExportToExcel()">Export</button>
+                    </div>
+                    <div class="col-md-auto col-sm-auto col-auto pad-right-9">                               
+                    </div>
+                </div>
+
+                <div class="top-Pad-10">
+                    <app-summary-info [GridBarModelInput]="GridBarModel" [SearchTerm]="searchParam" [KeyWordDataLength]="keywordData.length" [HideSummaryInfo]="false" CanSummaryId="KeywordFinderChart">
+                    </app-summary-info>
+                </div>
+                <div class="top-Pad-10">
+                    <div id="loading-container" *ngIf="pageToken != '' && loadMoreRecords == true">
+                        <div id="loading-text">We are getting more records for you.</div>
+                        <button id="stop-loading-btn" (click)="stopLoadingMoreRecords()">
+                          <div id="loading-spinner"></div>
+                          Stop Records
+                        </button>
+                      </div>
+
+                    <div class="row ">
+
+                        <div class="col keywordTabs">
+                            <a [ngClass]="{ active: isSet(1) }" (click)="setTab(1)">Keywords<span class="hide6"> ({{ config.totalItems }})</span></a>
+                            <a [ngClass]="{ active: isSet(2) }" (click)="setTab(2)">Related Keywords<span class="hide6"> ({{ relatedKeywordConfig.totalItems }})</span></a>
+                            <a [ngClass]="{ active: isSet(3) }" (click)="setTab(3)">Questions<span class="hide6"> ({{ questionConfig.totalItems }})</span></a>
+                            <a [ngClass]="{ active: isSet(4) }" (click)="setTab(4)">Prepositions<span class="hide6"> ({{ prepConfig.totalItems }})</span></a>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col result-hd-contain2" [hidden]="!isSet(1)">
+
+                            <table mdbTable>
+                                <thead>
+                                    <tr>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="KeywordText">
+                                            Keywords <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Keywords are pulled from the Google autocomplete. Keywords are generated by placing different search
+                                    terms into the search box of Google."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="SearchVolume">
+                                            Search Volume <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Search Volume is the average number of times people search for this exact keyword per month. It
+                                    helps you understand how popular the keyword is."></i>
+                                        </th>
+                                        <th class="tableGreen-border " [mdbTableSort]="keywordData" sortBy="Ternd">
+                                            Trend <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Trend shows how the monthly search volume for a keyword has changed over the last 12 months."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="HighestBid">
+                                            High Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Highest Bid is highest bid which paid."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="LowestBid">
+                                            Low Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Lowest Bid is lowest bid which paid.."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="Competition">
+                                            Competition <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Competition is the number of advertisers bidding on each keyword, relative to all keywords across
+                                    Google. It helps you understand how competitive the keyword is."></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-template ngFor let-keyword [ngForOf]="keywordData | paginate: config" let-i="index">
+                                        <tr class="result-row" (click)="showHideGraph(keyword.ID)">
+                                            
+                                            <td [innerHTML]="formatKeywordText(keyword.KeywordText, searchFieldGoogle.value) | safeHtml">
+                                       
+                                            </td>
+                                            <td [className]="((!blnIsUserLogged && (i > wordCount || config.currentPage > 1))) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.SearchVolume | number:'.' }}</td>
+                                            <td [className]="((!blnIsUserLogged && (i > wordCount || config.currentPage > 1))) ? 'text-blur' : ''" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''"></td>
+                                            <td [className]="((!blnIsUserLogged && (i > wordCount || config.currentPage > 1))) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                                            <td [className]="((!blnIsUserLogged && (i > wordCount || config.currentPage > 1))) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                                            <td [className]="((!blnIsUserLogged && (i > wordCount || config.currentPage > 1))) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.Competition  }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                                        </tr>
+                                        <tr [attr.id]=" 'trGraph' + keyword.ID" [style.display]=" 'none'">
+                                            <td colspan="7">
+                                                <div class="div-chart-info" [attr.id]=" 'divInfo' + keyword.ID"></div>
+                                                <canvas [attr.id]=" 'canvas' + keyword.ID"></canvas>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+
+                                </tbody>
+                            </table>
+
+                            <pagination-controls id="keywordPaginationControl" (pageChange)="pageChanged($event)"></pagination-controls>
+                        </div>
+                        <div class="col result-hd-contain2" [hidden]="!isSet(2)">
+                            <table mdbTable>
+                                <thead>
+                                    <tr>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="KeywordText">
+                                            Keywords <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Keywords are pulled from the Google autocomplete. Keywords are generated by placing different search
+                                    terms into the search box of Google."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="SearchVolume">
+                                            Search Volume <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Search Volume is the average number of times people search for this exact keyword per month. It
+                                    helps you understand how popular the keyword is."></i>
+                                        </th>
+                                        <th class="tableGreen-border " [mdbTableSort]="keywordData" sortBy="Ternd">
+                                            Trend <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Trend shows how the monthly search volume for a keyword has changed over the last 12 months."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="HighestBid">
+                                            High Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Highest Bid is highest bid which paid."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="LowestBid">
+                                            Low Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Lowest Bid is lowest bid which paid.."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="Competition">
+                                            Competition <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Competition is the number of advertisers bidding on each keyword, relative to all keywords across
+                                    Google. It helps you understand how competitive the keyword is."></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-template ngFor let-keyword [ngForOf]="relatedKeywordDate | paginate: relatedKeywordConfig" let-i="index">
+                                        <tr class="result-row" (click)="showHideRelatedKeywordGraph(keyword.ID)">
+                                            <td >
+                                                {{ keyword.KeywordText }}
+                                            </td>
+                                            <td [className]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.SearchVolume | number:'.' }}</td>
+                                            <td [className]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                                            <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                                            <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                                            <td [className]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (relatedKeywordConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                                        </tr>
+                                        <tr [attr.id]=" 'trRelatedKeywordGraph' + keyword.ID" [style.display]=" 'none'">
+                                            <td colspan="7">
+                                                <div class="div-chart-info" [attr.id]=" 'divInfoRelatedKeyword' + keyword.ID"></div>
+                                                <canvas [attr.id]=" 'canvasRelatedKeyword' + keyword.ID"></canvas>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+
+                                </tbody>
+                            </table>
+
+                            <pagination-controls id="relatedKeywordPaginationControl" (pageChange)="pageChangedRelatedKeyword($event)"></pagination-controls>
+                        </div>
+                        <div class="col result-hd-contain2" [hidden]="!isSet(3)">
+                            <table mdbTable>
+                                <thead>
+                                    <tr>
+                                        <th class="tableGreen-border" [mdbTableSort]="questionsData" sortBy="KeywordText">
+                                            Keywords <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="questionsData" sortBy="SearchVolume">
+                                            Search Volume <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border " [mdbTableSort]="questionsData" sortBy="Ternd">
+                                            Trend <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="HighestBid">
+                                            High Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Highest Bid is highest bid which paid."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="LowestBid">
+                                            Low Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Lowest Bid is lowest bid which paid.."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="questionsData" sortBy="Competition">
+                                            Competition <i class='fa fa-sort'></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="result-row" *ngFor="let keyword of questionsData | paginate: questionConfig;let i = index;" >
+                                        <td >
+                                            {{ keyword.KeywordText }}
+                                        </td>
+                                        <td [className]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.SearchVolume | number:'.' }}</td>
+                                        <td [className]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''"  [attr.title]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                                        <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                                            <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                                        <td [className]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (questionConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <pagination-controls id="questionsPaginationControl" (pageChange)="pageQuestionsChanged($event)"></pagination-controls>
+                        </div>
+                        <div class="col result-hd-contain2" [hidden]="!isSet(4)">
+                            <table mdbTable>
+                                <thead>
+                                    <tr>
+                                        <th class="tableGreen-border" [mdbTableSort]="prepData" sortBy="KeywordText">
+                                            Keywords <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="prepData" sortBy="SearchVolume">
+                                            Search Volume <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border " [mdbTableSort]="prepData" sortBy="Ternd">
+                                            Trend <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="HighestBid">
+                                            High Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Highest Bid is highest bid which paid."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="keywordData" sortBy="LowestBid">
+                                            Low Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Lowest Bid is lowest bid which paid.."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="prepData" sortBy="Competition">
+                                            Competition <i class='fa fa-sort'></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="result-row" *ngFor="let keyword of prepData | paginate: prepConfig;let i = index;">
+                                        <td>
+                                            {{ keyword.KeywordText }}
+                                        </td>
+                                        <td [className]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.SearchVolume | number:'.' }}</td>
+                                        <td [className]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                                        <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                                        <td [className]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (config.currentPage > 1)) ? 'Want to see data, please login.' : ''">$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                                        <td [className]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1 && blnIsUserLogged == false)) ? 'text-blur' : ''" [attr.title]="((!blnIsUserLogged && i > 4) || (prepConfig.currentPage > 1)) ? 'Want to see data, please login.' : ''">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls id="prepPaginationControl" (pageChange)="pagePrepChanged($event)"></pagination-controls>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div> -->

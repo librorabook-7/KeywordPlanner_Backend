@@ -1,0 +1,201 @@
+<div class="alert alert-danger center" role="alert" *ngIf="showError">
+    {{ errorString }}
+</div>
+
+<!-- <div class="bg">
+    <div class="nav">
+        <a href="index.html"><img src="content/logo-04-04.png" alt="" class="logo"></a>
+        <a href="Home.html" class="nav-anchor">Keyword Finder</a>
+        <a href="Competitor Analysis.html" class="nav-anchor">Competitor Analysis</a>
+        <a href="Search.html" class="nav-anchor">Search Volume</a>
+        <a href="pro.html" class="nav-anchor">Keyword Planner Pro</a>
+        <a href="Contact Us.html" class="nav-anchor">Customer Support</a>
+        <img src="content/google play-04-04.png" alt="" class="nav-img-2">
+    </div>
+</div> -->
+<br>
+<h2 class="head-1-signup">Sign Up <span style="color: black;"> For Free </span></h2>
+<hr class="line-signup">
+<form class="form-signup php-email-form aos-init aos-animate" action="" [formGroup]="requiredForm" method="post" role="form" data-aos="fade-up">
+    <label for="email">First Name:</label><br>
+    <input placeholder="John" type="text" name="username" class="form-control contact-input-fld" [(ngModel)]="accountModel.FirstName" required formControlName="FirstName">
+    <div *ngIf="requiredForm.controls['FirstName'].invalid && requiredForm.controls['FirstName'].touched" class="alert alert-danger">
+        <div *ngIf="requiredForm.controls['FirstName'].errors.required">
+            First name is required.
+      </div>
+    </div>
+    <label for="email">Last Name:</label>
+    <input placeholder="Smith" type="text" name="username" class="form-control contact-input-fld" [(ngModel)]="accountModel.LastName" required formControlName="LastName">
+    <div *ngIf="requiredForm.controls['LastName'].invalid && requiredForm.controls['LastName'].touched" class="alert alert-danger">
+        <div *ngIf="requiredForm.controls['LastName'].errors.required">
+            Last name is required.
+        </div>
+    </div>
+    <label for="email">Email:</label>
+    <input placeholder="abc@example.com" type="email" name="username" class="form-control contact-input-fld" [(ngModel)]="accountModel.EmailAddress" id="username" required email="true" formControlName="EmailAddress">
+    <div *ngIf="requiredForm.controls['EmailAddress'].invalid && requiredForm.controls['EmailAddress'].touched" class="alert alert-danger">
+      <div *ngIf="requiredForm.controls['EmailAddress'].errors.required">
+          Email is required.
+      </div>
+      <div *ngIf="requiredForm.controls['EmailAddress'].errors.email">
+          Please provide valid email.
+      </div>
+    </div>
+    <label for="email">Password:</label><br>
+    <input placeholder="Password" type="password" class="form-control contact-input-fld" name="password" [(ngModel)]="accountModel.Password" required formControlName="Password">
+    <div *ngIf="requiredForm.controls['Password'].invalid && requiredForm.controls['Password'].touched" class="alert alert-danger">
+      <div *ngIf="requiredForm.controls['Password'].errors.required">
+          Password is required.
+      </div>
+      <div *ngIf="requiredForm.controls['Password'].errors.minlength">
+          Password must be at least 6 characters.
+      </div>
+    </div>
+    <label for="email">Confirm Password:</label><br>
+    <input placeholder="Re-type Password" type="password" class="form-control contact-input-fld" name="password" [(ngModel)]="accountModel.NewPassword" required formControlName="NewPassword">
+    <div *ngIf="requiredForm.controls['NewPassword'].invalid && requiredForm.controls['NewPassword'].touched" class="alert alert-danger">
+      <div *ngIf="requiredForm.controls['NewPassword'].errors.required">
+          Password is required.
+      </div>
+      <div *ngIf="requiredForm.controls['NewPassword'].errors.confirmedValidator">
+          Password and Confirm Password must be match.
+      </div>
+    </div>
+    <div class="act-btn-signup">
+        <button class="action-btn-1-signup" style="flex: 1; padding: 16px" (click)="onSignUp()">Sign Up</button>
+        <button class="action-btn-2-signup" style="flex: 1; padding: 16px" (click)="onRedirect()">Forgot Password?</button>
+    </div>
+</form>
+<div class="b-signup">
+    <h5 class="head-2-signup">Or Sign Up Using</h5>        
+
+    <button class="g-button-signup" (click)="triggerGoogleAction()"> 
+        <img src="../../../assets/content/google.png" style="width: 36px; border-radius: 18px; height: 36px; background-color: white;" alt="">
+        Continue with Google
+    </button>
+    <asl-google-signin-button style="display: none;" #customGoogleBtn></asl-google-signin-button>
+    <button class="f-button-signup" (click)="signInWithFb()"> 
+        <img src="../../../../assets/content/facebook.png" alt="">
+        Continue with Facebook
+    </button>
+</div>
+<h5 class="head-2-signup">Or if you have account, </h5>
+<p class="p-1-signup">click here for <a class="clr-signup px-0" href="/signup">Login </a>or to change password click <a class="clr-signup px-0" href="/changepassword">Change
+    password</a></p>
+<a href="" class="link-signup">
+    <h2>For Sign Up, Watch a Full Video</h2>
+    <img src="Images/Group.png" alt="">
+    <h2>KEYWORD PLANNER</h2>
+</a>
+
+<!-- old design -->
+<!-- <section class="border-bottom bg-gray top-Pad-10">
+  <div class="container flexi-width">
+      <div class="row">
+          <div class="col-12">
+              <div class="row mtb10">
+                  <div class="col no-side-padding">
+                      <div class="row">
+                          <div class="col right-content">
+                              <h1 class="center x-font blogHD">Create an Account</h1>
+                          </div>
+                      </div>
+                      <div class="row d-flex justify-content-center">
+                          <div class="col-lg-6 col-md-6 col-sm-auto pad24 ">
+                              <form action="" [formGroup]="requiredForm" method="post" role="form" class="php-email-form aos-init aos-animate" data-aos="fade-up">
+                                  <div class="form-group login-form-cnt">
+                                      <label for="email" class="pl-2">First Name</label>
+                                      <input placeholder="John" type="text" name="username" class="form-control contact-input-fld" [(ngModel)]="accountModel.FirstName" required formControlName="FirstName">
+                                     
+                                      <div *ngIf="requiredForm.controls['FirstName'].invalid && requiredForm.controls['FirstName'].touched" class="alert alert-danger">
+                                        <div *ngIf="requiredForm.controls['FirstName'].errors.required">
+                                            First name is required.
+                                      </div>
+                                    </div>
+                           
+                                  </div>
+                                  <div class="form-group login-form-cnt">
+                                      <label for="email" class="pl-2">Last Name</label>
+                                      <input placeholder="Smith" type="text" name="username" class="form-control contact-input-fld" [(ngModel)]="accountModel.LastName" required formControlName="LastName">
+                                      <div *ngIf="requiredForm.controls['LastName'].invalid && requiredForm.controls['LastName'].touched" class="alert alert-danger">
+                                        <div *ngIf="requiredForm.controls['LastName'].errors.required">
+                                            Last name is required.
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group login-form-cnt">
+                                      <label for="email" class="pl-2">Email Address</label>
+                                      <input placeholder="abc@example.com" type="email" name="username" class="form-control contact-input-fld" [(ngModel)]="accountModel.EmailAddress" id="username" required email="true" formControlName="EmailAddress">
+                                      <div *ngIf="requiredForm.controls['EmailAddress'].invalid && requiredForm.controls['EmailAddress'].touched" class="alert alert-danger">
+                                        <div *ngIf="requiredForm.controls['EmailAddress'].errors.required">
+                                            Email is required.
+                                        </div>
+                                        <div *ngIf="requiredForm.controls['EmailAddress'].errors.email">
+                                            Please provide valid email.
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group login-form-cnt">
+                                      <label for="email" class="pl-2">Password</label>
+                                      <input placeholder="Password" type="password" class="form-control contact-input-fld" name="password" [(ngModel)]="accountModel.Password" required formControlName="Password">
+                                      <div *ngIf="requiredForm.controls['Password'].invalid && requiredForm.controls['Password'].touched" class="alert alert-danger">
+                                        <div *ngIf="requiredForm.controls['Password'].errors.required">
+                                            Password is required.
+                                        </div>
+                                        <div *ngIf="requiredForm.controls['Password'].errors.minlength">
+                                            Password must be at least 6 characters.
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group login-form-cnt">
+                                      <label for="email" class="pl-2">Confirm Password</label>
+                                      <input placeholder="Re-type Password" type="password" class="form-control contact-input-fld" name="password" [(ngModel)]="accountModel.NewPassword" required formControlName="NewPassword">
+                                      <div *ngIf="requiredForm.controls['NewPassword'].invalid && requiredForm.controls['NewPassword'].touched" class="alert alert-danger">
+                                        <div *ngIf="requiredForm.controls['NewPassword'].errors.required">
+                                            Password is required.
+                                        </div>
+                                        <div *ngIf="requiredForm.controls['NewPassword'].errors.confirmedValidator">
+                                            Password and Confirm Password must be match.
+                                        </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="row padT10">
+                                      <div class="col-6">
+                                          <button type="submit" class="btn btn-red-user" style="width: 100%;" (click)="onSignUp()">Sign Up</button>
+                                      </div>
+                                      <div class="col-6">
+                                          <button type="submit" class="btn" style="width:100%; border:1px solid #e1e1e1; background-color: white;" (click)="onRedirect()">Forget Password?</button>
+                                      </div>
+                                  </div>
+                                  <div class="my-10">
+                                    <div class="txt1 text-center p-t-54 p-b-20">
+                                        <span class="d-block signup-text"> 
+                                            Or Sign Up Using
+                                        </span>
+                                    </div>
+                                  </div>
+                                  <div class="row">                            
+                                      <div class="flex-c-m">
+                                        <div class="row d-flex justify-content-center p20t p20b">
+                                            <button class="w100c p10b social-button" (click)="triggerGoogleAction()"><img src="./../../../assets/login-with-google.png" alt="Continue with Google"></button>
+                                            <button class="w100c social-button" (click)="signInWithFb()"><img src="./../../../assets/login-with-fb.png" alt="Continue with Facebook"></button>
+                                         </div>
+                                         <asl-google-signin-button style="display: none;" #customGoogleBtn></asl-google-signin-button>
+
+                                        </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col">
+                                        <p class="extra-txt">Or if you have account, click here for <a href="/login" style="font-weight: 500;">Login</a> or to change password click <a href="/changepassword" style="font-weight: 500;">Change password</a></p>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section> -->

@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col result-hd-contain">
+        Search for “{{ SearchTerm }}” found <span>{{ KeyWordDataLength }}</span> unique keywords
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col rs-container1">
+
+        <div class="row">
+            <div class="col rs-hd-title"><div class="rs-hd-elps">Total Search Volumee</div> <span>{{ (GridBarModelInput == null) ? "" : (GridBarModelInput.TotalSearchVolume | number) }}</span></div>
+            <div class="col rs-hd-title"><div class="rs-hd-elps">Average Trend</div> 
+                <span [innerHTML]="getTrendArrow(GridBarModelInput == null ? '' : GridBarModelInput.TotalTernd) | safeHtml">
+                    <!-- <i class="bi bi-arrow-down-short rs-down-arrow"></i>  -->
+                    <!-- <i
+                    [ngClass]="{
+                        'bi bi-arrow-up-short rs-up-arrow' : (GridBarModelInput != null && GridBarModelInput.TotalTernd.indexOf('-1') == -1),
+                        'bi bi-arrow-down-short rs-down-arrow' : (GridBarModelInput != null && GridBarModelInput.TotalTernd.indexOf('-1') > -1)
+                     }"
+                    ></i> 
+                    {{ (GridBarModelInput == null ? '' : GridBarModelInput.TotalTernd) }} -->
+
+                </span>
+            </div>
+            <!-- <div class="col rs-hd-title"><div class="rs-hd-elps">Average CPC (USD)</div> <span>{{ (GridBarModelInput == null ? "" : '$ ' + (GridBarModelInput.TotalAverageCPC | padzero:2)) }}</span></div> -->
+            <div class="col rs-hd-title"><div class="rs-hd-elps">Average Competition</div> <span>{{ (GridBarModelInput == null ? "" : GridBarModelInput.AverageCompetition | number:'1.1-2') }}</span></div>
+        </div>
+
+        <div class="row">
+            <!-- <div class="col center">( 49.3 % increase in last 12 months)</div> -->
+            <div class="col center">
+                <div [attr.id]="CanSummaryId + 'ChartMainInfo'" class="col-lg-12 summary div-chart-info">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col center">
+                <!-- <img src="../../../assets/graph.jpg" alt=""> -->
+                <div [attr.id]="CanSummaryId" class="bar-chart-container">
+                    <!-- <canvas id="canChartSummary"></canvas> -->
+                    <canvas [attr.id]="CanSummaryId + 'canvas'"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- <div class="col-lg-12">
+    <p class="hdg-bg hdg-bg-search">Search for "{{ SearchTerm }}" found <span class="txt-bold">{{ KeyWordDataLength }}</span> unique keywords</p>
+</div> -->
+
+<!-- <div class="col-lg-12">
+    <div class="summ-info" *ngIf="!HideSummaryInfo">
+        <div class="col-lg-3 left-float summary">
+            Total Search Volume
+            <div class="numbers">
+                {{ (GridBarModelInput == null) ? "" : (GridBarModelInput.TotalSearchVolume | number) }}
+            </div>
+        </div>
+        <div class="col-lg-3 left-float summary">
+            Average Trend
+            <div style="font-size: 18px" [ngClass]="{
+          'numbers' : (GridBarModelInput != null && GridBarModelInput.TotalTernd.indexOf('-1') == -1),
+          'negative' : (GridBarModelInput != null && GridBarModelInput.TotalTernd.indexOf('-1') > -1)
+       }" [innerHTML]="getTrendArrow(GridBarModelInput == null ? '' : GridBarModelInput.TotalTernd) | safeHtml">
+            </div>
+        </div>
+        <div class="col-lg-3 left-float summary">
+            Average CPC (USD)
+            <div class="numbers">
+                {{ (GridBarModelInput == null ? "" : '$ ' + (GridBarModelInput.TotalAverageCPC | padzero:2)) }}
+            </div>
+        </div>
+        <div class="col-lg-3 left-float summary">
+            Average Competition
+            <div class="numbers">
+                {{ (GridBarModelInput == null ? "" : GridBarModelInput.AverageCompetition | number:'1.1-2') }}
+            </div>
+        </div>
+    </div>
+    <div [attr.id]="CanSummaryId + 'ChartMainInfo'" class="col-lg-12 summary div-chart-info">
+    </div>
+    <div [attr.id]="CanSummaryId" class="bar-chart-container">
+        <canvas [attr.id]="CanSummaryId + 'canvas'"></canvas>
+    </div>
+</div> -->

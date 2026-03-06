@@ -1,0 +1,21 @@
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.left-side {
+    flex-basis: 60%;
+    text-align: left;
+}
+
+.right-side {
+    flex-basis: 35%;
+    text-align: right;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}

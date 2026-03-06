@@ -1,0 +1,133 @@
+<main>
+  <div class="inner-head-contact">
+      <h1>Customer <span class="inner-head-1-contact">Support</span></h1>
+      <p class="Inner-para-contact">Need Help? Or have any question, please fill the form below and <br> we will
+          contact
+          you shortly!</p>
+  </div>
+</main>
+
+<div class="inner-box-contact">
+  <form class="flex-container-contact" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <div class="inner-child-contact">
+          <p class="inner-para-1-contact">Drop Us a Line, We Value Your Feedback</p>
+      </div>
+      <div>
+          <hr class="ht-contact">
+      </div>
+      <div class="inline-flex-contact">
+          <div id="fname-contact">
+              <label for="fname-contact">Full Name:</label><br>
+              <input type="text" formControlName="name" class="input-contact" id="fullName" required>
+              <div class="validate" >
+                <div class="text-danger" *ngIf="isSubmit && contactForm.get('name').errors.required">Full Name is required.</div>
+              </div>
+          </div>
+          <div id="email-contact">
+              <label for="email">Email Address:</label><br>
+              <input type="email" formControlName="email" class="input-contact" id="email" required>
+                      <div class="validate" >
+                        <div class="text-danger" *ngIf="isSubmit && contactForm.get('email').errors.required">Email Address is required.</div>
+                        <div class="text-danger" *ngIf="isSubmit && contactForm.get('email').errors.email">Invalid email format.</div>
+                      </div>
+          </div>
+          <div id="subject-contact">
+              <label for="subject">Subject:</label><br>
+              <input type="text" formControlName="subject" class="input-contact" id="subject" required>
+              <div class="validate">
+                <div class="text-danger" *ngIf="isSubmit && contactForm.get('subject').errors.required">Subject is required.</div>
+              </div>
+          </div>
+      </div>
+      <div class="flex-container-1-contact">
+          <label for="">Message:</label><br>
+          <textarea formControlName="message" class="input-main-contact" id="message" style="height: 150px" required></textarea>
+          <div class="validate" >
+            <div class="text-danger" *ngIf="isSubmit && contactForm.get('message').errors.required">Message is required.</div>
+          </div>
+      </div>
+      <div class="btn-contact">
+          <button class="btn-input-contact" type="submit">Submit</button>
+      </div>
+  </form>
+</div>
+
+
+<!-- old code -->
+<!-- <div class="col-md-9 col-12">
+
+  <div class="row">
+      <div class="col top-Pad-15">
+          <h1 class="center">Contact Us / Customer Support</h1>
+          <p class="center">Need Help? Or have any question, please fill the form below and<br>we will contact you shortly!</p>
+      </div>
+  </div>
+
+
+
+  <div class="row top-Pad-15">
+      <div class="col-12 paymentWrap">
+
+          <div class="row">
+              <div class="col top-Pad-15" style="background-color: #f5f5f5; border-bottom: 1px solid #e4e4e4;">
+                  <h1 class="center">Drop Us a Line, We Value Your Feedback</h1>
+              </div>
+          </div>
+
+          <div class="row d-flex justify-content-center">
+              <div class="col-lg-8 col-md-8 col-sm-12 pad24">
+                <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group login-form-cnt">
+                      <label for="fullName" class="pl-2">Full Name</label>
+                      <input type="text" formControlName="name" class="form-control contact-input-fld" id="fullName" required>
+                      <div class="validate" >
+                        <div class="text-danger" *ngIf="isSubmit && contactForm.get('name').errors.required">Full Name is required.</div>
+                      </div>
+                    </div>
+                  
+                    <div class="form-group login-form-cnt">
+                      <label for="email" class="pl-2">Email Address</label>
+                      <input type="email" formControlName="email" class="form-control contact-input-fld" id="email" required>
+                      <div class="validate" >
+                        <div class="text-danger" *ngIf="isSubmit && contactForm.get('email').errors.required">Email Address is required.</div>
+                        <div class="text-danger" *ngIf="isSubmit && contactForm.get('email').errors.email">Invalid email format.</div>
+                      </div>
+                    </div>
+                  
+                    <div class="form-group login-form-cnt">
+                      <label for="subject" class="pl-2">Subject</label>
+                      <input type="text" formControlName="subject" class="form-control contact-input-fld" id="subject" required>
+                      <div class="validate">
+                        <div class="text-danger" *ngIf="isSubmit && contactForm.get('subject').errors.required">Subject is required.</div>
+                      </div>
+                    </div>
+                  
+                    <div class="form-group login-form-cnt">
+                      <label for="message" class="pl-2">Message</label>
+                      <textarea formControlName="message" class="form-control contact-input-fld" id="message" style="height: 150px" required></textarea>
+                      <div class="validate" >
+                        <div class="text-danger" *ngIf="isSubmit && contactForm.get('message').errors.required">Message is required.</div>
+                      </div>
+                    </div>
+                  
+                    <div class="form-group login-form-cnt">
+                      <button type="submit" class="btn subscribeBtn">Submit</button>
+                    </div>
+                  </form>
+                  
+              </div>
+              <div class="row">
+                <div class="col top-Pad-15">
+                  <div class="alert alert-success" role="alert" *ngIf="successMessage != ''">
+                    {{ successMessage }}
+                  </div>
+                </div>
+              </div>
+
+          </div>
+
+
+      </div>
+  </div>
+
+</div> -->

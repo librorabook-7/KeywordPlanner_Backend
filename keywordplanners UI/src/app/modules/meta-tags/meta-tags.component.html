@@ -1,0 +1,80 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 offset-md-2 ml-0">
+            <div class="text-right mb-3">
+                <button class="btn btn-outline-danger" (click)="openModal()">Add Meta</button>
+            </div>
+
+            <table mdbTable>
+                <thead>
+                    <tr>
+                        <th class="tableGreen-border" sortBy="SerialNo">
+                            #
+                        </th>
+                        <th class="tableGreen-border" [mdbTableSort]="metaTags" sortBy="MetaName">
+                            Meta Tag Name
+                        </th>
+                        <th class="tableGreen-border" [mdbTableSort]="metaTags" sortBy="Content">
+                            Meta Tag Content
+                        </th>
+                        <th class="tableGreen-border">
+                           Delete
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template ngFor let-metaTag [ngForOf]="metaTags | paginate: metaconfig" let-i="index">
+                        <tr class="result-row">
+                            <th scope="row">{{i+1}}</th>
+                            <td>
+                                {{ metaTag.MetaName }}
+                            </td>
+                            <td>
+                                {{ metaTag.Content }}
+                            </td>
+                            <td><span class="bi bi-trash" (click)="deleteMetaTags(metaTag.AppMetaTagsId,i)"></span></td>
+                        </tr>
+                    </ng-template>
+                    <tr *ngIf="metaTags?.length == 0" class="result-row text-center" >
+
+                    <td colspan="4">No Meta Tag Found...</td></tr>
+
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-end">
+                <pagination-controls id="metaTagPaginationControl" (pageChange)="pageChanged($event)"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="metaTagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    [ngStyle]="{ display: isModelOpen() }" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="showAddModal = false;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="keywordForm">
+                    <div class="form-group">
+                        <label for="keywordName">Keyword Name</label>
+                        <input type="text" class="form-control" id="keywordName" formControlName="keywordName"
+                            placeholder="Enter Keyword Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="keywordContent">Keyword Content</label>
+                        <textarea class="form-control" id="keywordContent" formControlName="keywordContent" rows="4"
+                            placeholder="Enter Keyword Content"></textarea>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary" (click)="addMetaTags()">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

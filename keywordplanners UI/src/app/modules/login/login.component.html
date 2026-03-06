@@ -1,0 +1,127 @@
+
+<!-- 
+<div class="bg">
+    <div class="nav">
+      <a href="index.html"><img src="assets/content/logo-04-04.png" alt="" class="logo"></a>
+      <a href="Home.html" class="nav-anchor">Keyword Finder</a>
+      <a href="Competitor Analysis.html" class="nav-anchor">Competitor Analysis</a>
+      <a href="Search.html" class="nav-anchor">Search Volume</a>
+      <a href="pro.html" class="nav-anchor">Keyword Planner Pro</a>
+      <a href="Contact Us.html" class="nav-anchor">Customer Support</a>
+      <img src="assets/content/google play-04-04.png" alt="" class="nav-img-2">
+    </div>
+  </div>
+  <br> -->
+  <h2 style="color: #DB4628;" class="head-1-login">LOG <span style="color: black;"> IN</span></h2>
+  <hr class="line-login">
+  <form class="form-login" action="" method="post" role="form"  data-aos="fade-up">
+    <label for="email">Email:</label><br>
+    <input placeholder="abc@example.com" type="text" name="username" [(ngModel)]="accountModel.EmailAddress"
+      id="username" data-rule="minlen:4" data-msg="Please enter at least 4 chars"><br>
+    <label for="email">Password:</label><br>
+    <input placeholder="Password" type="password" class="form-control contact-input-fld" name="password" [(ngModel)]="accountModel.Password" id="password" data-rule="email" data-msg="Please enter a valid email"><br><br>
+    <div class="validate"></div>
+    <div class="act-btn-login">
+      <button type="submit" class="action-btn-1-login" style="flex: 1; padding: 16px" (click) ="onLogin()">Log In</button>
+      <button type="submit" class="action-btn-2-login" style="flex: 1; padding: 16px" (click)="onRedirect()">Forgot Password?</button>
+    </div>
+  </form>
+  <div class="b-login">
+    <h5 class="head-2-login">Or Sign Up Using</h5>
+    <button class="g-button-login" (click)="triggerGoogleAction()"> <img src="Images/G.png"  alt="">Continue with
+      Google</button>
+    <button class="f-button-login" (click)="signInWithFb()"> <img src="Images/f.png" alt="">Continue with Facebook</button>
+    <asl-google-signin-button style="display: none;" #customGoogleBtn></asl-google-signin-button>
+  </div>
+  <h5 class="head-2-login">Or if you don’t have account, </h5>
+  <p class="p-1-login">click here for <span class="clr"><a href="/signup" style="font-weight: 500; color: #DB4628;" class="px-0">Signup</a> or to change password click <a href="/changepassword" class="px-0" style="font-weight: 500; color: #DB4628;">Change password</a></span></p>
+  <a class="link-login">
+    <h2>For Sign Up, Watch a Full Video</h2>
+    <img src="Images/Group.png" alt="">
+    <h2>KEYWORD PLANNER</h2>
+  </a>
+
+<!-- old code  -->
+<!-- <div class="alert alert-danger center" role="alert" *ngIf="showError">
+    {{ errorString }}
+</div> -->
+<!-- <section class="border-bottom bg-gray top-Pad-10">
+  <div class="container flexi-width">
+      <div class="row">
+          <div class="col-12">
+            <div class="row mtb10">
+<div class="col no-side-padding">
+
+  <div class="row">
+      <div class="col right-content">
+  <h1 class="center x-font blogHD">Login</h1>
+      </div>
+  </div>
+ 
+
+  <div class="row d-flex justify-content-center">
+              <div class="col-lg-5 col-md-6 col-sm-auto pad24">
+                  <form action="" method="post" role="form" class="php-email-form aos-init aos-animate" data-aos="fade-up">
+
+                      <div class="form-group login-form-cnt">
+                          <label for="email" class="pl-2">Email</label>
+                          <input placeholder="abc@example.com" type="text" name="username" [(ngModel)]="accountModel.EmailAddress" class="form-control contact-input-fld" id="username" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                          <div class="validate"></div>
+                      </div>
+                      <div class="form-group login-form-cnt">
+                          <label for="email" class="pl-2">Password</label>
+                          <input placeholder="Password" type="password" class="form-control contact-input-fld" name="password" [(ngModel)]="accountModel.Password" id="password" data-rule="email" data-msg="Please enter a valid email">
+                          <div class="validate"></div>
+                      </div>
+
+                      
+
+                      <div class="row padT10">
+                          <div class="col-6 col-auto">
+                              <button type="submit" class="btn btn-red-user" style="width: 100%;" (click) ="onLogin()">Login</button>
+                          </div>
+                          <div class="col-6 col-auto">
+                              <button type="submit" class="btn" style="width:100%; border:1px solid #e1e1e1; background-color: white;" (click)="onRedirect()">Forget Password</button>
+                          </div>
+                      </div>
+                      <div class="txt1 text-center p-t-54 p-b-20">
+                        <span>
+                        Or Sign Up Using
+                        </span>
+                        </div>
+                      <div class="flex-c-m">
+                        <div class="row d-flex justify-content-center p20t p20b">
+                            <button class="w100c p10b" (click)="triggerGoogleAction()"><img src="./../../../assets/login-with-google.png" alt="Continue with Google"></button>
+                            <button class="w100c" (click)="signInWithFb()"><img src="./../../../assets/login-with-fb.png" alt="Continue with Facebook"></button>
+                         </div>
+                         <asl-google-signin-button style="display: none;" #customGoogleBtn></asl-google-signin-button>
+
+                        </div>
+                     
+                      
+
+                      <div class="row">
+                          <div class="col">
+                              <p class="extra-txt">Or if you don’t have account, click here for <a href="/signup" style="font-weight: 500;">Signup</a> or to change password click <a href="/changepassword" style="font-weight: 500;">Change password</a></p>
+                              
+                          </div>
+                      </div>
+                  </form>
+              </div>
+
+          </div>
+
+ 
+
+</div>
+</div>
+
+      
+
+          </div>
+          
+          
+      </div>
+
+  </div>
+</section> -->

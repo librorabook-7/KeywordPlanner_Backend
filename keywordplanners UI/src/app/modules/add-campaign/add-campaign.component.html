@@ -1,0 +1,101 @@
+<h2 mat-dialog-title>Create Ads</h2>
+
+<mat-dialog-content class="mat-typography">
+    <section>
+        <div style="padding-top:  15px">
+            <div class="container">
+
+                <!--Account Selection-->
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="exampleInputEmail1" style="color: red">Select AdWord Account</label>
+                        <select class="form-control form-control-sm" (change)="getCampaings($event)">
+                                <option value="0">Select Account</option>
+                                <option *ngFor="let account of lstAccounts" value="{{ account.Key }}"> {{ account.Value }} </option>
+                            </select>
+                    </div>
+                </div>
+                <!--Campaign Selection-->
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="exampleInputEmail1" style="color: red">Select AdWord Campaign</label>
+                        <select class="form-control form-control-sm" (change)="getUserAddGroups($event)">
+                                <option value="0">Select Campaign</option>
+                                <option *ngFor="let campaign of lstCampigns" value="{{ campaign.m_Item1 }}"> {{  campaign.m_Item2  }} </option>
+                            </select>
+                    </div>
+                </div>
+                <!--Adgroup Seelection-->
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="exampleInputEmail1" style="color: red">Select AdWord AdGroup</label>
+                        <select class="form-control form-control-sm" id="selAdGroups" #selAdGroups>
+                                <option>Select AdGroup</option>
+                                <option *ngFor="let adGroup of lstAdGroups" value="{{ adGroup.Key }}"> {{ adGroup.Value }} </option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="" style="color: red">Keywords</label>
+                        <textarea rows="5" cols="60" name="keywords" class="form-control form-control-sm" [(ngModel)]="pickedKeywordsString">{{ pickedKeywordsString }}</textarea>
+                    </div>
+                </div>
+
+                <!--Ad Form Detail-->
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="exampleInputEmail1" style="color: red">Ad 1:</label>
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="HeadLine Part1" required [(ngModel)]="GoogleAd1.HeadLinePart1" />
+
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="HeadLine Part2" [(ngModel)]="GoogleAd1.HeadLinePart2" />
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="HeadLine Part3" [(ngModel)]="GoogleAd1.HeadLinePart3" />
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="Description 1" required [(ngModel)]="GoogleAd1.Description1" />
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="Description 2" [(ngModel)]="GoogleAd1.Description2" />
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="Enter comma separated Urls" required [(ngModel)]="GoogleAd1.FinalUrls" />
+                        <br>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="exampleInputEmail1" style="color: red">Ad 2:</label>
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="HeadLine Part1" [(ngModel)]="GoogleAd2.HeadLinePart1" />
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="HeadLine Part2" [(ngModel)]="GoogleAd2.HeadLinePart2" />
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="HeadLine Part3" [(ngModel)]="GoogleAd2.HeadLinePart3" />
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="Description 1" [(ngModel)]="GoogleAd2.Description1" />
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="Description 2" [(ngModel)]="GoogleAd2.Description2" />
+                        <br>
+                        <input class="form-control form-control-sm" type="text" placeholder="Enter comma separated Urls" [(ngModel)]="GoogleAd2.FinalUrls" />
+                        <br>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Button Section-->
+    <section>
+
+    </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <!-- <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-12" style="text-align: right">
+                <button class="btn normal-button" type="submit" (click)="onSaveAds(selAdGroups.value)">Generate Ads</button>
+                <button class="btn normal-button" type="submit" [mat-dialog-close]="true" style="margin-left: 5px">Cancel</button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-actions>

@@ -1,0 +1,21 @@
+<tr>
+      <td>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input"  (change)="showHideGraph(rowIndex)">
+          <label class="form-check-label" for="WebHosting">{{ keyword.KeywordText }}</label>
+        </div>
+      </td>
+      <td>{{ keyword.SearchVolume }}</td>
+      <td>-45%</td>
+      <td>{{ keyword.AverageCPC }}</td>
+      <td>{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel }})</td>
+  </tr>
+  <tr  [attr.id]="'trGraph' + rowIndex">
+    <td colspan="5">
+      <div class="chart-container">    
+        <!-- <canvas [attr.id]="'canvas' + rowIndex"></canvas>     -->
+        <canvas id="canvas" class="canvas"></canvas>  
+      </div> 
+    </td> 
+</tr>
+

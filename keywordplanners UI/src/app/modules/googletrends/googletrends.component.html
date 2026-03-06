@@ -1,0 +1,113 @@
+<div class="tab-pane fade show active" id="google-tb" role="tabpanel" aria-labelledby="google-tb-tab">
+    <div class="row no-side-spacing">
+        <!-- for responsiveness -->
+        <div class="col-md-auto col-sm-auto col-pad21">
+            <select #selMediaType placeholder="All" class="lang-dp">
+                <option value="0">All</option>
+            </select>
+        </div>
+        <div class="col col-pad21">
+            <i class="bi bi-search"></i>
+            <input type="search" (keydown)="onEnter($event)" #searchFieldTrend class="header-search" placeholder="Search Keyword...">
+        </div>
+        <!-- for responsiveness -->
+        <div class="col-md-auto col-sm-auto col-pad21b">
+            <i class="bi bi-geo-alt"></i>
+            <select name="" #selLocations id="selLocations" placeholder="Languages" class="lan-rs-dp lang-dp">
+                <option *ngFor="let location of locationList" value="{{ location.CCLC }}" [selected]="location.Name == 'United States'"> {{ location.CountryLanguage }} </option>
+            </select>
+        </div>
+        <!-- for responsiveness -->
+        <div class="col-md-auto col-sm-auto pad0">
+            <button class="hdr-search-btn" type="submit" (click)="onClickMe(searchFieldTrend.value, selMediaType.value)">Search</button>
+        </div>
+        
+    </div>
+</div>
+<div class="disclaimer-container">
+    <img src="../../../assets/disclaimer.svg" alt="" width="21px"><span class="font-bold">DISCLAIMER: </span> This version of the Google Trend is Beta Version &amp; Alpha release will be released soon.
+</div>
+<div class="row no-side-margin">
+
+
+    <div class="col">
+
+        <div class="row keywordBg">
+            <div class="col">
+
+                <div class="top-Pad-10">
+                    <app-summary-info [GridBarModelInput]="GridBarModel" [SearchTerm]="searchParam" [KeyWordDataLength]="keywordDataLength" [HideSummaryInfo]="true" CanSummaryId="GoogleTrendChart">
+                    </app-summary-info>
+                </div>
+
+                <div class="top-Pad-10">
+
+
+                    <div class="row ">
+
+                        <div class="col keywordTabs">
+                            <a [ngClass]="{ active: isSet(1) }" (click)="setTab(1)">Rising</a>
+                            <a [ngClass]="{ active: isSet(2) }" (click)="setTab(2)">Top</a>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col result-hd-contain2" [hidden]="!isSet(1)">
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="tableGreen-border">Keywords</th>
+                                        <th class="tableGreen-border">Search Volume</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let rankKeyword of RisingTrendData">
+                                            <td>
+                                                {{rankKeyword.topic.title}} - {{ rankKeyword.topic.type }}
+                                            </td>
+                                            <td>
+                                                {{rankKeyword.value | number:'.'}} ({{rankKeyword.formattedValue}})
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col result-hd-contain2" [hidden]="!isSet(2)">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="tableGreen-border">Keywords</th>
+                                        <th class="tableGreen-border">Search Volume</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let rankKeyword of TopTrendData">
+                                            <td>
+                                                {{rankKeyword.topic.title}} - {{ rankKeyword.topic.type }}
+                                            </td>
+                                            <td>
+                                                {{rankKeyword.value | number:'.'}}
+                                            </td>
+                                        </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        
+                        
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

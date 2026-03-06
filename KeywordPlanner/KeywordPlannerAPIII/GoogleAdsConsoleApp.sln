@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleAdsConsoleApp", "GoogleAdsConsoleApp\GoogleAdsConsoleApp.csproj", "{453E1ABE-A077-4BAA-BEA0-80E9121555A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeywordPlannerAPI", "KeywordPlannerAPI\KeywordPlannerAPI.csproj", "{34C43A36-72BC-4F33-9F76-09D5D8233133}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeywordPlannerParser", "KeywordPlannerParser\KeywordPlannerParser.csproj", "{57F1EC7E-380E-4CE7-B795-7EB57620B0DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeywordPlanNetwork", "KeywordPlanNetwork\KeywordPlanNetwork.csproj", "{F5B737BB-F26C-4F8A-831C-A0E09E388452}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeywordPlannerModels", "KeywordPlannerModels\KeywordPlannerModels.csproj", "{FD6A0C91-4D4D-4391-B582-CDE0FF5B2C1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{453E1ABE-A077-4BAA-BEA0-80E9121555A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{453E1ABE-A077-4BAA-BEA0-80E9121555A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{453E1ABE-A077-4BAA-BEA0-80E9121555A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{453E1ABE-A077-4BAA-BEA0-80E9121555A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34C43A36-72BC-4F33-9F76-09D5D8233133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C43A36-72BC-4F33-9F76-09D5D8233133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C43A36-72BC-4F33-9F76-09D5D8233133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C43A36-72BC-4F33-9F76-09D5D8233133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F1EC7E-380E-4CE7-B795-7EB57620B0DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F1EC7E-380E-4CE7-B795-7EB57620B0DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F1EC7E-380E-4CE7-B795-7EB57620B0DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F1EC7E-380E-4CE7-B795-7EB57620B0DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5B737BB-F26C-4F8A-831C-A0E09E388452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5B737BB-F26C-4F8A-831C-A0E09E388452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5B737BB-F26C-4F8A-831C-A0E09E388452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5B737BB-F26C-4F8A-831C-A0E09E388452}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD6A0C91-4D4D-4391-B582-CDE0FF5B2C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD6A0C91-4D4D-4391-B582-CDE0FF5B2C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD6A0C91-4D4D-4391-B582-CDE0FF5B2C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD6A0C91-4D4D-4391-B582-CDE0FF5B2C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

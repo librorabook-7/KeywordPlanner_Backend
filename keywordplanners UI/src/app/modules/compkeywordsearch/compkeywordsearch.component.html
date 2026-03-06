@@ -1,0 +1,587 @@
+<div class="bg-2">
+    <div class="bg-2-sub-s">
+        <div class="bg-2-sub-s-2" style="gap: 0px !important;">
+            <div class="col-3">
+                <select id="ddlIncludeChartDataComp" placeholder="All" class="lang-dp bg-2-sub-s-2-para col-12 py-1" style="border-radius: 6px;">
+                    <option value="0">Data</option>
+                    <option value="1">Charts</option>
+                </select>
+            </div>
+            <div class="col- bg-white" style="border-radius: 6px;">
+                <i class="bi bi-geo-alt" style="vertical-align: text-bottom; color: black; margin-left: 6px;"></i>
+                <select name="" #selCompLocations id="selCompLocations" placeholder="Languages" class="lan-rs-dp lang-dp" style="border-radius: 6px;">
+                    <option *ngFor="let location of compLocationList" value="{{ location.CCLC }}" [selected]="location.Name == 'United States'"> {{ location.CountryLanguage }} </option>
+                </select>
+            </div>
+        </div>
+        <div class="row no-side-spacing search-bar mt-4" style="border-radius: 6px ;background-color: white; background-image: none; border: 1px solid black;">
+            <div class="col col-pad21 col-11 mycol" style="border-right: none;">
+                <input class="bg-2-sub-s-2-search" type="search" (keydown)="onEnter($event)" #searchCompField class="header-search" placeholder="Search URL...">
+            </div>
+            <div class="col-1 pt-1 search-btn-container">
+                <button class="search-btn" type="submit" (click)="onClickMe(searchCompField.value, '0', selCompLocations.value, txtNegativeKeywordsComp.value, false,'')">
+                    <i class="searchIcon"></i>
+                </button>
+            </div>
+    
+        </div>
+    </div>
+    <div class="bg-2-sub-s-2-head">
+        <div style="padding: 24px" class="flex col gap-8">
+            <div class="container flex col">
+                <div class="flex gap-32">
+                    <div class="flex-1">
+                        <h2 style="text-align: center;">Search Volume Setting</h2>
+                        <div class="flex col gap-8 pad-16">
+                            <div class="flex center gap-32">
+                                <label for="Language" class="label">Language</label>
+                                <select id="ddlGoogleLanguageComp" #selSeachLanguageRefSearchCompKey placeholder="Languages" class="form-control">
+                                    <option *ngFor="let searchLang of compUniqueLanguageList" [selected]="searchLang.Language == 'English'" [value]="searchLang.LanguageID" >{{searchLang.Language}}</option>
+                                </select>
+                            </div>
+                            <div class="flex center gap-32">
+                                <label for="Network" class="label">Network</label>
+                                <select id="ddlGoogleSearchNetworkComp" #selGoolgeSearchNetwork placeholder="Network" class="form-control">
+                                    <option value="0">Google</option>
+                                    <option value="1">Google Search Partners</option>
+                                </select>
+                            </div>
+                            <div class="flex center gap-32">
+                                <label for="Network" class="label">Location</label>
+                                <select id="ddlGoogleLocationsComp" #selLocationsRefSearhCompKey placeholder="Location" class="select">
+                                    <option *ngFor="let searchLoc of compUniqueLocationList" [selected]="searchLoc.Name == 'United States'" [value]="searchLoc.CountryID">{{searchLoc.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 style="text-align: center;">Search Volume Setting</h2>
+                        <div class="flex col gap-8">
+                            <div class="flex gap-32 center">
+                                <label class="label" for="Volume">Volume</label>
+                                <input id="txtGoogleSaerchVolumeMinComp"  class="input-number" #searchVolumeMin type="number" placeholder="Min" min="0">
+                                <input id="txtGoogleSaerchVolumeMaxComp"  class="input-number" #searchVolumeMax type="number" placeholder="Max">
+                            </div>
+                            <div class="flex gap-32 center">
+                                <label class="label" for="Competition">Competition</label>
+                                <input id="txtGoogleCompetitionMinComp"  class="input-number" #competitionMin type="number" placeholder="Min" min="0">
+                                <input id="txtGoogleCompetitionMaxComp"  class="input-number" #competitionMax type="number" placeholder="Max">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h2 style="text-align: center">Negative Keyword</h2>
+                        <textarea class="text-area" id="txtNegativeKeywordsComp" #txtNegativeKeywordsComp
+                            placeholder="Enter comma seperated negative keywords">
+                    </textarea>
+                    </div>
+                </div>
+                <div>
+                    <button class="go-btn" type="submit" (click)="onClickMe(searchCompField.value, '0', selLocationsRefSearhCompKey.value +'/'+ selSeachLanguageRefSearchCompKey.value, txtNegativeKeywordsComp.value, true,'')">Go</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-2-sub-s">
+        <h5 class="head-1-search">Search <span style="color: #DB4628;"> Result</span></h5>
+        <div class="row py-2">
+            <div class="col hide5">
+            </div>
+            <div class="col-md-auto col-sm-auto col-auto pad-right-9">
+                <button class="keyword-use-btn" (click)="onCopyClipBoard()">Copy to Clipboard</button>
+            </div>
+            <div class="col-md-auto col-sm-auto col-auto pad-right-9">
+                <button class="keyword-use-btn" (click)="onExportToExcel()">Export</button>
+            </div>
+            <div class="col-md-auto col-sm-auto col-auto pad-right-9">                               
+            </div>
+        </div>
+        <p class="sub-head-1-search">
+            <app-summary-info [GridBarModelInput]="CompGridBarModel" [SearchTerm]="searchParam" [KeyWordDataLength]="compkeywordData.length" [HideSummaryInfo]="false" CanSummaryId="CompetitorAnalysisFinderChart">
+            </app-summary-info>
+        </p>
+        <div class="margin-search">
+            <table class="styled-table-2-search">
+                <thead>
+                    <tr class="stroke-search">
+                        <th class="hover-1-search" [ngStyle]="{ color: isSet(1) ? '#DB4628' : 'black' }" (click)="setTab(1)">Keywords ({{ compconfig.totalItems }})</th>
+                        <th class="hover-3-search" [ngStyle]="{ color: isSet(3) ? '#DB4628' : 'black' }" (click)="setTab(3)">Questions ({{ compquestionConfig.totalItems }})</th>
+                        <th class="hover-4-search" [ngStyle]="{ color: isSet(4) ? '#DB4628' : 'black' }" (click)="setTab(4)">Prepositions ({{ compprepConfig.totalItems }})</th>
+                    </tr>
+                </thead>
+            </table>
+    
+        </div>
+        <div class="margin-search" [hidden]="!isSet(1)">
+            <table class="styled-table-search" mdbTable>
+                <thead>
+                    <tr>
+                        <th [mdbTableSort]="compkeywordData" sortBy="KeywordText">Keywords 
+                            <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Keywords are pulled from the Google autocomplete. Keywords are generated by placing different search
+                    terms into the search box of Google."></i>
+                        </th>
+                        <th [mdbTableSort]="compkeywordData" sortBy="SearchVolume">Search Volume 
+                            <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Search Volume is the average number of times people search for this exact keyword per month. It
+                            helps you understand how popular the keyword is."></i>
+                        </th>
+                        <th [mdbTableSort]="compkeywordData" sortBy="Ternd">Trend 
+                            <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Trend shows how the monthly search volume for a keyword has changed over the last 12 months."></i>
+                        </th>
+                        <th [mdbTableSort]="compkeywordData" sortBy="HighestBid">High Bid 
+                            <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Highest Bid is highest bid which paid."></i>
+                        </th>
+                        <th [mdbTableSort]="compkeywordData" sortBy="LowestBid">Low Bid 
+                            <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Lowest Bid is lowest bid which paid.."></i>
+                        </th>
+                        <th  [mdbTableSort]="compkeywordData" sortBy="Competition">Competition <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Competition is the number of advertisers bidding on each keyword, relative to all keywords across
+                            Google. It helps you understand how competitive the keyword is."></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template ngFor let-keyword [ngForOf]="compkeywordData | paginate: compconfig" let-i="index">
+                        <tr class="result-row" (click)="showHideGraph(keyword.ID)">
+                            <td>
+                                {{ keyword.KeywordText }}
+                            </td>
+                            <td>{{ keyword.SearchVolume | number:'.' }}</td>
+                            <td class="" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                            <td>$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                            <td>$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                            <td class="">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                        </tr>
+                        <tr [attr.id]=" 'trGraph' + keyword.ID" [style.display]=" 'none'">
+                            <td colspan="7">
+                                <div class="div-chart-info" [attr.id]=" 'divInfo' + keyword.ID"></div>
+                                <canvas [attr.id]=" 'canvas' + keyword.ID"></canvas>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+            <pagination-controls id="compkeywordPaginationControl" (pageChange)="pageChanged($event)"></pagination-controls>
+            <div class="">
+                <p class="p-1-search">🚀 Keyword Planner <span style="color: #DB4628;">Pro</span></p>
+                <p class="p-2-search">Need more information?</p>
+                <p class="p-3-search">Get all potential keywords with keyword planners pro</p>
+                <div class="btn-align-search">
+                    <button class="btn-1-search">Try it now!</button>
+                </div>
+    
+            </div>
+        </div>
+        <div class="margin-search" [hidden]="!isSet(3)">
+            <table class="styled-table-search" mdbTable>
+                <thead>
+                    <tr>
+                        <th [mdbTableSort]="compquestionsData" sortBy="KeywordText">Keywords 
+                            <i class='fa fa-sort'></i>
+                        </th>
+                        <th [mdbTableSort]="compquestionsData" sortBy="SearchVolume">Search Volume 
+                            <i class='fa fa-sort'></i>
+                        </th>
+                        <th [mdbTableSort]="compquestionsData" sortBy="Ternd">Trend 
+                            <i class='fa fa-sort'></i>
+                        </th>
+                        <th [mdbTableSort]="compquestionsData" sortBy="HighestBid">High Bid 
+                            <i class='fa fa-sort'></i>
+                        </th>
+                        <th [mdbTableSort]="compquestionsData" sortBy="LowestBid">Low Bid 
+                            <i class='fa fa-sort'></i>
+                        </th>
+                        <th [mdbTableSort]="compquestionsData" sortBy="Competition">Competition <i class='fa fa-sort'></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="result-row" *ngFor="let keyword of compquestionsData | paginate: compquestionConfig">
+                        <td>
+                            {{ keyword.KeywordText }}
+                
+                        </td>
+                        <td>{{ keyword.SearchVolume | number:'.' }}</td>
+                        <td class="" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                        <td>$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                        <td>$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                        <td class="">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls id="compquestionsPaginationControl" (pageChange)="pageQuestionsChanged($event)"></pagination-controls>
+            <div class="">
+                <p class="p-1-search">🚀 Keyword Planner <span style="color: #DB4628;">Pro</span></p>
+                <p class="p-2-search">Need more information?</p>
+                <p class="p-3-search">Get all potential keywords with keyword planners pro</p>
+                <div class="btn-align-search">
+                    <button class="btn-1-search">Try it now!</button>
+                </div>
+    
+            </div>
+        </div>
+        <div class="margin-search" [hidden]="!isSet(4)">
+            <table class="styled-table-search" mdbTable>
+                <thead>
+                    <tr>
+                        <th [mdbTableSort]="compprepData" sortBy="KeywordText">Keywords 
+                            <i class='fa fa-sort'></i>
+                        </th>
+                        <th [mdbTableSort]="compprepData" sortBy="SearchVolume">Search Volume 
+                            <i class='fa fa-sort'></i>
+                        </th>
+                        <th [mdbTableSort]="compprepData" sortBy="Ternd">Trend 
+                            <i class='fa fa-sort'></i>
+                        </th>
+                        <th [mdbTableSort]="compprepData" sortBy="HighestBid">High Bid 
+                            <i class='fa fa-sort'></i>
+                        </th>
+                        <th [mdbTableSort]="compprepData" sortBy="LowestBid">Low Bid 
+                            <i class='fa fa-sort'></i>
+                        </th>
+                        <th [mdbTableSort]="compprepData" sortBy="Competition">Competition
+                            <i class='fa fa-sort'></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="result-row" *ngFor="let keyword of compprepData | paginate: compprepConfig">
+                        <td>
+                            {{ keyword.KeywordText }}
+                        </td>
+                        <td>{{ keyword.SearchVolume | number:'.' }}</td>
+                        <td class="" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                        <td>$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                        <td>$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                        <td class="">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls id="compprepPaginationControl" (pageChange)="pagePrepChanged($event)"></pagination-controls>
+            <div class="">
+                <p class="p-1-search">🚀 Keyword Planner <span style="color: #DB4628;">Pro</span></p>
+                <p class="p-2-search">Need more information?</p>
+                <p class="p-3-search">Get all potential keywords with keyword planners pro</p>
+                <div class="btn-align-search">
+                    <button class="btn-1-search">Try it now!</button>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- old code  -->
+<!-- <div class="tab-pane fade show active" id="google-tb" role="tabpanel" aria-labelledby="google-tb-tab">
+    <div class="row no-side-spacing">
+        <div class="col-md-auto col-sm-auto col-pad21">
+            <select id="ddlIncludeChartDataComp" placeholder="All" class="lang-dp">
+                <option value="0">Data</option>
+                <option value="1">Charts</option>
+            </select>
+        </div>
+        <div class="col col-pad21">
+            <i class="bi bi-search"></i>
+            <input type="search" (keydown)="onEnter($event)" #searchCompField class="header-search" placeholder="Search URL...">
+        </div>
+        <div class="col-md-auto col-sm-auto col-pad21b">
+            <i class="bi bi-geo-alt"></i>
+            <select name="" #selCompLocations id="selCompLocations" placeholder="Languages" class="lan-rs-dp lang-dp">
+                <option *ngFor="let location of compLocationList" value="{{ location.CCLC }}" [selected]="location.Name == 'United States'"> {{ location.CountryLanguage }} </option>
+            </select>
+        </div>
+        <div class="col-md-auto col-sm-auto pad0">
+            <button class="hdr-search-btn" type="submit" (click)="onClickMe(searchCompField.value, '0', selCompLocations.value, txtNegativeKeywordsComp.value, false,'')">Search</button>
+        </div>
+    </div>
+</div>
+<div class="row no-side-margin">
+
+
+    <div class="col">
+
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col refineSearch-container">
+                        Refine Search
+                        <i class="{{ refineSearchPath }}" style="padding-left: 3px;" (click)="onShowHideSearchPanel($event)"></i>
+                        <i class="fa fa-question-circle" style="padding-left: 3px;" title="Filter your grid data."></i>
+                    </div>
+                </div>
+
+                <div class="row keywordBg" [hidden]="!showSearchSection">
+                    <div class="col result-hd-contain3 ">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <div class="row">
+                                    <div class="col border-bottom rs-con-hd">Search Volume Settings</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col md-a10">
+                                        <div class="row justify-content-between">
+                                            <div class="col-4">Location</div>
+                                            <div class="col rs-select-con">
+                                                <select id="ddlGoogleLocationsComp" #selLocationsRefSearhCompKey class="form-control">
+                                                    <option *ngFor="let searchLoc of compUniqueLocationList" [selected]="searchLoc.Name == 'United States'" [value]="searchLoc.CountryID">{{searchLoc.Name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-between">
+                                            <div class="col-4">Language</div>
+                                            <div class="col rs-select-con">
+                                                <select id="ddlGoogleLanguageComp" #selSeachLanguageRefSearchCompKey class="form-control">
+                                                    <option *ngFor="let searchLang of compUniqueLanguageList" [selected]="searchLang.Language == 'English'" [value]="searchLang.LanguageID" >{{searchLang.Language}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-between">
+                                            <div class="col-4">Network</div>
+                                            <div class="col rs-select-con">
+                                                <select id="ddlGoogleSearchNetworkComp" #selGoolgeSearchNetwork placeholder="Languages" class="form-control">
+                                                    <option value="0">Google</option>
+                                                    <option value="1">Google Search Partners</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-12">
+                                <div class="row">
+                                    <div class="col border-bottom rs-con-hd">Search Volume Settings</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col md-a10">
+                                        <div class="row justify-content-between">
+                                            <div class="col-4">Volume</div>
+                                            <div class="col rs-input-con ">
+                                                <input id="txtGoogleSaerchVolumeMinComp"  class="form-control" #searchVolumeMin type="text" placeholder="Min">
+                                            </div>
+                                            <div class="col rs-input-con ">
+                                                <input id="txtGoogleSaerchVolumeMaxComp"  class="form-control" #searchVolumeMax type="text" placeholder="Max">
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-between">
+                                            <div class="col-4">Competition</div>
+                                            <div class="col rs-input-con ">
+                                                <input id="txtGoogleCompetitionMinComp"  class="form-control" #competitionMin type="text" placeholder="Min">
+                                            </div>
+                                            <div class="col rs-input-con ">
+                                                <input id="txtGoogleCompetitionMaxComp"  class="form-control" #competitionMax type="text" placeholder="Max">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-12">
+                                <div class="row">
+                                    <div class="col border-bottom rs-con-hd">Negative Keywords</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col md-a10">
+                                        <textarea id="txtNegativeKeywordsComp" #txtNegativeKeywordsComp class="form-control" placeholder="Enter comma separated negative keywords"  style="resize: none;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col right">
+                                <button class="rs-go-btn" type="submit" (click)="onClickMe(searchCompField.value, '0', selLocationsRefSearhCompKey.value +'/'+ selSeachLanguageRefSearchCompKey.value, txtNegativeKeywordsComp.value, true,'')">Go</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        <div class="row keywordBg">
+            <div class="col">
+
+                <div class="row padT10">
+                    <div class="col hide5">
+                    </div>
+                    <div class="col-md-auto col-sm-auto col-auto pad-right-9">
+                        <button class="keyword-use-btn" (click)="onCopyClipBoard()">Copy to Clipboard</button>
+                    </div>
+                    <div class="col-md-auto col-sm-auto col-auto pad-right-9">
+                        <button class="keyword-use-btn" (click)="onExportToExcel()">Export</button>
+                    </div>
+                    <div class="col-md-auto col-sm-auto col-auto pad-right-9">                               
+                    </div>
+                </div>
+
+                <div class="top-Pad-10">
+                    <app-summary-info [GridBarModelInput]="CompGridBarModel" [SearchTerm]="searchParam" [KeyWordDataLength]="compkeywordData.length" [HideSummaryInfo]="false" CanSummaryId="CompetitorAnalysisFinderChart">
+                    </app-summary-info>
+                </div>
+
+                <div class="top-Pad-10">
+
+                    <div id="loading-container" *ngIf="pageToken != '' && loadMoreRecords == true">
+                        <div id="loading-text">We are getting more records for you.</div>
+                        <button id="stop-loading-btn" (click)="stopLoadingMoreRecords()">
+                          <div id="loading-spinner"></div>
+                          Stop Records
+                        </button>
+                      </div>
+                    <div class="row ">
+
+                        <div class="col keywordTabs">
+                            <a [ngClass]="{ active: isSet(1) }" (click)="setTab(1)">Keywords ({{ compconfig.totalItems }})</a>
+                            <a [ngClass]="{ active: isSet(3) }" (click)="setTab(3)">Questions ({{ compquestionConfig.totalItems }})</a>
+                            <a [ngClass]="{ active: isSet(4) }" (click)="setTab(4)">Prepositions ({{ compprepConfig.totalItems }})</a>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col result-hd-contain2" [hidden]="!isSet(1)">
+
+                            <table mdbTable>
+                                <thead>
+                                    <tr>
+                                        <th class="tableGreen-border" [mdbTableSort]="compkeywordData" sortBy="KeywordText">
+                                            Keywords <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Keywords are pulled from the Google autocomplete. Keywords are generated by placing different search
+                                    terms into the search box of Google."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compkeywordData" sortBy="SearchVolume">
+                                            Search Volume <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Search Volume is the average number of times people search for this exact keyword per month. It
+                                    helps you understand how popular the keyword is."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compkeywordData" sortBy="Ternd">
+                                            Trend <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Trend shows how the monthly search volume for a keyword has changed over the last 12 months."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compkeywordData" sortBy="HighestBid">
+                                            High Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Highest Bid is highest bid which paid."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compkeywordData" sortBy="LowestBid">
+                                            Low Bid<i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Lowest Bid is lowest bid which paid.."></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compkeywordData" sortBy="Competition">
+                                            Competition <i class='fa fa-sort'></i><i class="fa fa-question-circle" style="padding-left: 3px;" title="Competition is the number of advertisers bidding on each keyword, relative to all keywords across
+                                    Google. It helps you understand how competitive the keyword is."></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-template ngFor let-keyword [ngForOf]="compkeywordData | paginate: compconfig" let-i="index">
+                                        <tr class="result-row" (click)="showHideGraph(keyword.ID)">
+                                            <td>
+                                                {{ keyword.KeywordText }}
+                                            </td>
+                                            <td>{{ keyword.SearchVolume | number:'.' }}</td>
+                                            <td class="" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                                            <td>$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                                            <td>$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                                            <td class="">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                                        </tr>
+                                        <tr [attr.id]=" 'trGraph' + keyword.ID" [style.display]=" 'none'">
+                                            <td colspan="7">
+                                                <div class="div-chart-info" [attr.id]=" 'divInfo' + keyword.ID"></div>
+                                                <canvas [attr.id]=" 'canvas' + keyword.ID"></canvas>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+
+                                </tbody>
+                            </table>
+
+                            <pagination-controls id="compkeywordPaginationControl" (pageChange)="pageChanged($event)"></pagination-controls>
+                        </div>
+                        <div class="col result-hd-contain2" [hidden]="!isSet(3)">
+                            <table mdbTable>
+                                <thead>
+                                    <tr>
+                                        <th class="tableGreen-border" [mdbTableSort]="compquestionsData" sortBy="KeywordText">
+                                            Keywords <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compquestionsData" sortBy="SearchVolume">
+                                            Search Volume <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compquestionsData" sortBy="Ternd">
+                                            Trend <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compquestionsData" sortBy="HighestBid">
+                                            High Bid<i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compquestionsData" sortBy="LowestBid">
+                                            Low Bid<i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compquestionsData" sortBy="Competition">
+                                            Competition <i class='fa fa-sort'></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="result-row" *ngFor="let keyword of compquestionsData | paginate: compquestionConfig">
+                                        <td>
+                                            {{ keyword.KeywordText }}
+                                
+                                        </td>
+                                        <td>{{ keyword.SearchVolume | number:'.' }}</td>
+                                        <td class="" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                                        <td>$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                                        <td>$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                                        <td class="">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <pagination-controls id="compquestionsPaginationControl" (pageChange)="pageQuestionsChanged($event)"></pagination-controls>
+                        </div>
+                        <div class="col result-hd-contain2" [hidden]="!isSet(4)">
+                            <table mdbTable>
+                                <thead>
+                                    <tr>
+                                        <th class="tableGreen-border" [mdbTableSort]="compprepData" sortBy="KeywordText">
+                                            Keywords <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compprepData" sortBy="SearchVolume">
+                                            Search Volume <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compprepData" sortBy="Ternd">
+                                            Trend <i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compprepData" sortBy="HighestBid">
+                                            High Bid<i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compprepData" sortBy="LowestBid">
+                                            Low Bid<i class='fa fa-sort'></i>
+                                        </th>
+                                        <th class="tableGreen-border" [mdbTableSort]="compprepData" sortBy="Competition">
+                                            Competition <i class='fa fa-sort'></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="result-row" *ngFor="let keyword of compprepData | paginate: compprepConfig">
+                                        <td>
+                                            {{ keyword.KeywordText }}
+                                        </td>
+                                        <td>{{ keyword.SearchVolume | number:'.' }}</td>
+                                        <td class="" [innerHTML]="getTrendArrow(keyword.Ternd) | safeHtml"></td>
+                                        <td>$ {{ keyword.HighestBid | number:'1.1-2'}}</td>
+                                        <td>$ {{ keyword.LowestBid | number:'1.1-2'}}</td>
+                                        <td class="">{{ keyword.Competition | number:'1.1-2' }} ({{ keyword.CompetitionLabel | titlecase }})</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls id="compprepPaginationControl" (pageChange)="pagePrepChanged($event)"></pagination-controls>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div> -->

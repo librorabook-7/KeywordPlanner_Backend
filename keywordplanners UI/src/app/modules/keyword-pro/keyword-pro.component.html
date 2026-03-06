@@ -1,0 +1,323 @@
+<h1 class="h1">Welcome to Keyword <span class="sp-pro">Planner Pro</span></h1>
+<div class="plan-switcher-pro">
+    <div class="plan-options-pro">
+        <span class="monthlyplanlabel-pro active-pro">Monthly Plan</span>
+        <label class="switch-pro">
+            <input type="checkbox" id="planToggle">
+            <span class="slider-pro"></span>
+        </label>
+        <span class="yearlyplanlabel-pro">Yearly Plan (Save 17%)</span>
+    </div>
+</div>
+
+<div class="plans-pro">
+    <!-- Monthly Plans -->
+    <div class="plan basic monthly-plan-pro">
+        <h2 class="h-f-pro">Basic Plan <span class="popular">Most Popular</span></h2>
+        <h3 class="proheadingsub">Monthly Subscription</h3>
+        <ul class="px-0 text-left">
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Keyword research for up to 3 projects
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>1000 keyword suggestions per project
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Competitor Analysis
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Search volume trends
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Keyword difficulty analysis
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Basic support
+            </li>
+        </ul>
+        <p class="price-pro">$4.99 / month</p>
+        <p class="billing-pro">prices are in USD, billed every month</p>
+        <button class="subscribe-pro">Subscribe Now</button>
+    </div>
+
+    <div class="plan premium monthly-plan-pro">
+        <h2 class="text-left">Premium Plan</h2>
+        <h3 class="proheadingsub">Monthly Subscription</h3>
+        <ul class="px-0 text-left">
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Unlimited keyword research projects
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>5000 keyword suggestions per project
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Advanced competitor analysis
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Historical search volume data
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>SERP analysis
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Priority support
+            </li>
+        </ul>
+        <p class="price-pro">$9.99 / month</p>
+        <p class="billing-pro">prices are in USD, billed every month</p>
+        <button class="subscribe-pro">Subscribe Now</button>
+    </div>
+
+    <!-- Yearly Plans -->
+    <div class="plan basic yearly-plan-pro" style="display: none;">
+        <h2 class="h-f">Basic Plan <span class="popular">Most Popular</span></h2>
+        <h3 class="proheadingsub">Yearly Subscription</h3>
+        <ul class="px-0 text-left">
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Keyword research for up to 3 projects
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>1000 keyword suggestions per project
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Competitor Analysis
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Search volume trends
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Keyword difficulty analysis
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Basic support
+            </li>
+        </ul>
+        <p class="price-pro">$44.99 / year</p>
+        <p class="billing-pro">prices are in USD, billed yearly</p>
+        <button class="subscribe-pro">Subscribe Now</button>
+    </div>
+
+    <div class="plan premium yearly-plan-pro" style="display: none;">
+        <h2 class="text-left">Premium Plan</h2>
+        <h3 class="proheadingsub">Yearly Subscription</h3>
+        <ul class="px-0 text-left">
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Unlimited keyword research projects
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>5000 keyword suggestions per project
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Advanced competitor analysis
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Historical search volume data
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>SERP analysis
+            </li>
+            <li class="line-f-pro">
+                <div class="line-pro"></div>Priority support
+            </li>
+        </ul>
+        <p class="price-pro">$99.99 / year</p>
+        <p class="billing-pro">prices are in USD, billed yearly</p>
+        <button class="subscribe-pro">Subscribe Now</button>
+    </div>
+
+</div>
+<!-- <ng-container *ngIf="!selectedPackage">
+    <div class="col-md-6 col-12" *ngFor="let e of packages; index as i" style="float: left;">
+
+        <div class="row top-Pad-15">
+            <div class="col-md-12 col-12 pro-plan">
+                <h1>{{e.Name}}</h1>
+                <ul>
+                    <li>Search Volume Data <i class="bi bi-check2 ifb grn"></i></li>
+                    <li>Bids <i class="bi bi-check2 ifb grn"></i></li>
+                    <li>Keyword Trend <i class="bi bi-check2 ifb grn"></i></li>
+                    <li>Youtube <i class="bi bi-check2 ifb grn"></i></li>
+                    <li>Keyword Competition <i class="bi bi-x ifb rd"></i></li>
+                    <li>Google Trend <i class="bi bi-check2 ifb grn"></i></li>
+                    <li>Competitor Analysis <i class="bi bi-x ifb rd"></i></li>
+                    <li>Bulk Keywords Search - {{e.Word_Count}}/day</li>
+                    <li>&nbsp;</li>
+                    <li class="li-lineheight">$<span class="priceBold rd">{{e.Price}}</span> / month<br><span
+                            class="miniprice">prices are in USD, billed every 12 months</span></li>
+                    <li>&nbsp;</li>
+                    <li><button type="button" class="btn subscribeBtn" (click)="choosePackage(e)">Subscribe Now</button></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group login-form-cnt">
+        <label for="email" class="pl-2">Debit / Credit Card Number:</label>                            
+        <div id="paypal-button-container"></div>                        
+
+    </div>
+    
+</ng-container>
+<ng-container *ngIf="selectedPackage">
+    <div class="col-md-9 col-12">
+
+        <div class="row">
+            <div class="col top-Pad-15">
+                <i _ngcontent-cji-c8="" (click)="this.selectedPackage=undefined" class="fa" style="font-size:24px"></i>
+                <h1 class="center">Complete Your Payment</h1>
+            </div>
+        </div>
+
+
+        <div class="row top-Pad-15">
+            <div class="col-12 orderSummary">
+
+
+                <div class="row orderHd-wrap">
+                    <div class="col-md-8 col-6">Order Summary</div>
+                    <div class="col-md-4 col-6">Price in USD</div>
+                </div>
+
+                <div class="row orderSmry-dtl">
+                    <div class="col-md-8 col-6">Keyword Tool Pro Business {{packageType}} Subscription</div>
+                    <div class="col-md-4 col-6">$<span>{{selectedPackage.Price}}</span>/{{packageType}}</div>
+                </div>
+
+                <div class="row orderSmry-dtl">
+                    <div class="col-md-8 col-6">Keyword Tool Pro Business {{packageType}} Subscription</div>
+                    <div class="col-md-4 col-6">$<span>{{selectedPackage.Price}}</span>/{{packageType}}</div>
+                </div>
+
+                <div class="row orderSmry-dtl-sm">
+                    <div class="col-md-4">&nbsp;</div>
+                    <div class="col-md-4 col-6 right">Subtotal</div>
+                    <div class="col-md-4 col-6">$<span>{{selectedPackage.Price}}</span>/{{packageType}}</div>
+                </div>
+
+                <div class="row orderSmry-dtl-sm">
+                    <div class="col-md-4">&nbsp;</div>
+                    <div class="col-md-4 col-6 right">Tax</div>
+                    <div class="col-md-4 col-6">$<span>00</span></div>
+                </div>
+
+                <div class="row orderSmry-dtl-ttl">
+                    <div class="col-md-4">&nbsp;</div>
+                    <div class="col-md-4 col-6 right"><span>Total</span></div>
+                    <div class="col-md-4 col-6">$<span>{{selectedPackage.Price}}</span>/{{packageType}}</div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="row top-Pad-15">
+            <div class="col-12 paymentWrap">
+
+                <div class="row">
+                    <div class="col top-Pad-15">
+                        <h1 class="center orderSmry-brd-btm">Enter Your Account Details</h1>
+                    </div>
+                </div>
+
+
+                <div class="row d-flex justify-content-center dashedBrd">
+                    <div class="col-lg-6 col-md-6 col-sm-auto pad24">
+                        <form action="" method="post" role="form" class="php-email-form aos-init aos-animate"
+                            data-aos="fade-up">
+
+                            <div class="form-group login-form-cnt">
+                                <label for="name" class="pl-2">Full Name</label>
+                                <input placeholder="John" type="text" name="username"
+                                    class="form-control contact-input-fld" id="username" data-rule="minlen:4"
+                                    data-msg="Please enter at least 4 chars">
+                                <div class="validate"></div>
+                            </div>
+
+
+                            <div class="form-group login-form-cnt">
+                                <label for="email" class="pl-2">Email Address</label>
+                                <input placeholder="abc@example.com" type="text" name="username"
+                                    class="form-control contact-input-fld" id="username" data-rule="minlen:4"
+                                    data-msg="Please enter at least 4 chars">
+                                <div class="validate"></div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col top-Pad-15">
+                        <h1 class="center orderSmry-brd-btm">Enter Your Payment Details</h1>
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 col-md-6 col-sm-auto pad24">
+                        <form action="" method="post" role="form" class="php-email-form aos-init aos-animate"
+                            data-aos="fade-up">
+
+                            <div class="form-group login-form-cnt"
+                                style="text-align: center; border: 1px solid #e4e4e4; line-height: 40px;">
+
+                                <h1 class="pm-bg">Payment Method</h1>
+
+                                <input type="radio" id="stripe" name="fav_language" value="stripe">&nbsp;&nbsp;
+                                <label for="stripe" style="margin-bottom: 0px;"> <img
+                                        src="../../../assets/stripe-icon.png" alt="Stripe"></label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <input type="radio" id="paypal" name="fav_language" value="paypal">&nbsp;&nbsp;
+                                <label for="stripe" style="margin-bottom: 0px;"> <img
+                                        src="../../../assets/paypal-icon.png" alt="PayPal"></label>
+
+                                <div class="validate"></div>
+
+                            </div>
+
+
+                            <div class="form-group login-form-cnt">
+                                <label for="email" class="pl-2">Debit / Credit Card Number:</label>                            
+                                <div id="paypal-button-container"></div>                        
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-8 form-group login-form-cnt">
+                                    <label for="email" class="pl-2">Expiration Date</label>
+                                    <input placeholder="MM/YY" type="text" name="date"
+                                        class="form-control contact-input-fld" id="date" data-rule="minlen:4"
+                                        data-msg="Please enter card expiry date">
+                                    <div class="validate"></div>
+                                </div>
+
+                                <div class="col-4 form-group login-form-cnt">
+                                    <label for="email" class="pl-2">CSV</label>
+                                    <input placeholder="123" type="text" name="123"
+                                        class="form-control contact-input-fld" id="123" data-rule="minlen:4"
+                                        data-msg="Please enter card csv, mentioned on card back">
+                                    <div class="validate"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group login-form-cnt">
+                                <button type="button" class="btn subscribeBtn">Subscribe Now</button>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</ng-container> -->

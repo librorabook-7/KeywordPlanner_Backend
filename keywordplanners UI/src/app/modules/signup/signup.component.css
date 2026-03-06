@@ -1,0 +1,42 @@
+.login100-social-item{
+    font-size:25px;
+    color:#fff;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-moz-box;
+    display:-ms-flexbox;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:34px;
+    height:34px;
+    border-radius:25%;
+    margin:5px
+  }
+  .social-button{
+    border: none;
+    background: transparent;
+  }
+
+  .w100c{
+      text-align:center;
+  }
+  .p10b{
+      padding-bottom:10px;
+  }
+  .p20t{
+      padding-top:20px;
+  }
+  .p20b{
+      padding-top:20px;
+  }
+  .my-10{
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+  .signup-text{
+    font-family: Poppins-Regular;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #666
+  }
